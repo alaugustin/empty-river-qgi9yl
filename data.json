@@ -1,18 +1,22 @@
 [
   {
     "cardName": "À la carte",
-    "value": "#f00"
+    "cardValue": 00,
+    "cardImg": "fooooooo",
   },
   {
-    "type": "Basic",
-    "value": "#0f0"
+    "cardName": "Basic",
+    "cardValue": 00,
+    "cardImg": "fooooooo",
   },
   {
-    "type": "Plus",
-    "value": "#00f"
+    "cardName": "Plus",
+    "cardValue": 000,
+    "cardImg": "fooooooo",
   },
   {
-    "type": "Premier",
-    "value": "#0ff"
+    "cardName": "Premier",
+    "cardValue": 000,
+    "cardImg": "fooooooo",
   }
 ]
