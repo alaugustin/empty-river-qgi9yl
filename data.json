@@ -1,0 +1,18 @@
+[
+  {
+    "cardName": "À la carte",
+    "value": "#f00"
+  },
+  {
+    "type": "Basic",
+    "value": "#0f0"
+  },
+  {
+    "type": "Plus",
+    "value": "#00f"
+  },
+  {
+    "type": "Premier",
+    "value": "#0ff"
+  }
+]
