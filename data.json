@@ -1,22 +1,23 @@
 [
   {
     "cardName": "À la carte",
-    "cardValue": 00,
-    "cardImg": "fooooooo",
+    "cardValue": 11,
+    "cardImg": "https://dummyimage.com/650x409/000/fff"
   },
   {
     "cardName": "Basic",
-    "cardValue": 00,
-    "cardImg": "fooooooo",
+    "cardValue": 22,
+    "cardImg": "https://www.caasco.com/~/media/caasco/membership/cards/membership_card_Basic.png"
   },
   {
     "cardName": "Plus",
-    "cardValue": 000,
-    "cardImg": "fooooooo",
+    "cardValue": 111,
+    "cardImg": "https://www.caasco.com/~/media/caasco/membership/cards/membership_card_Plus.png"
   },
   {
     "cardName": "Premier",
-    "cardValue": 000,
-    "cardImg": "fooooooo",
+    "cardValue": 222,
+    "cardImg": "https://www.caasco.com/~/media/caasco/membership/cards/membership_card_Premier.png"
   }
 ]
+Pfix
