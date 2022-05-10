@@ -1,0 +1,19 @@
+.tableRow {
+  /* display: flex;
+  flex-wrap: wrap; */
+}
+
+.tableColumn.mobile {
+  /* flex: 1 0 50%; */
+  background-color: red;
+}
+
+.tableColumn.tablet {
+  /* flex: 1 0 calc(100%/3); */
+  background-color: green;
+}
+
+.tableColumn.desk {
+  /* flex: 1 0 25%; */
+  background-color: gold;
+}
