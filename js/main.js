@@ -1,4 +1,40 @@
-const tableCellHolder = document.getElementsByClassName('tableColumn');
+const aLaCardData = cardData[0];
+console.log(aLaCardData);
+
+const basicCardData = cardData[1];
+console.log(basicCardData);
+
+const plusCardData = cardData[2];
+console.log(plusCardData);
+
+const premierCardData = cardData[3];
+console.log(premierCardData);
+
+
+const membershipCardHeadingList = document.querySelectorAll(".membership-card__heading");
+for (let index = 0; index < membershipCardHeadingList.length; index++) {
+  const element = membershipCardHeadingList[index];
+  element.innerHTML += cardData[index].cardName;
+}
+
+const membershipCardPriceList = document.querySelectorAll(".membership-card__price span");
+for (let index = 0; index < membershipCardPriceList.length; index++) {
+  const element = membershipCardPriceList[index];
+  element.innerHTML += cardData[index].cardValue;
+}
+
+const membershipCardImgList = document.querySelectorAll(".membership-card__card-image");
+for (let index = 0; index < membershipCardImgList.length; index++) {
+  const element = membershipCardImgList[index];
+  element.src = cardData[index].cardImg;
+}
+
+const membershipCardCtaList = document.querySelectorAll(".compare-cards__cta-container a");
+console.log(membershipCardCtaList);
+for (let index = 0; index < membershipCardCtaList.length; index++) {
+  const element = membershipCardCtaList[index];
+  element.href = cardData[index].cardLink;
+}
 
 document.addEventListener("DOMContentLoaded", function (e) {
 
@@ -25,10 +61,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     console.log("window.innerWidth: " + window.innerWidth);
   }
 
-  const map1 = mqls.map(
+  const mappedMq = mqls.map(
     x => x.addListener(mqh)
   );
-  // console.log(map1);
-
   mqh();
 });
