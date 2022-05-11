@@ -1,0 +1,11 @@
+@media (min-width: 600px) {
+  body .d-md-block {
+    display: block !important;
+  }
+}
+
+@media (min-width: 972px) {
+  body .d-lg-block {
+    display: block !important;
+  }
+}
