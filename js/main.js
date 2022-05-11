@@ -3,37 +3,24 @@ const tableCellHolder = document.getElementsByClassName('tableColumn');
 document.addEventListener("DOMContentLoaded", function (e) {
 
   let mqls = [
-    window.matchMedia("(max-width: 599px)"),
-    window.matchMedia("(min-width: 600px) and (max-width: 971px)"),
-    window.matchMedia("(min-width: 972px)")
+    window.matchMedia("(max-width: 767px)"),
+    window.matchMedia("(min-width: 768px) and (max-width: 991px)"),
+    window.matchMedia("(min-width: 992px)")
   ]
 
   const mqh = () => {
     if (mqls[0].matches) {
-      for (const box of tableCellHolder) {
-        box.classList.remove('tablet');
-        box.classList.remove('desk');
-        box.classList.add('mobile');
-        console.log("this is mobile");
-      }
-      console.log("CALLBACK (max-width: 400px)");
-      document.body.style.background = "green";
+      console.log("this is mobile");
+      console.log("CALLBACK (max-width: 767px)");
+
     } else if (mqls[1].matches) {
-      for (const box of tableCellHolder) {
-        box.classList.remove('mobile');
-        box.classList.remove('desk');
-        box.classList.add('tablet');
-        console.log("this is tablet");
-      }
-      console.log("CALLBACK (max-width: 600px)");
-      document.body.style.background = "red";
+
+      console.log("this is tablet");
+      console.log("CALLBACK (min-width: 768px)");
     } else if (mqls[2].matches) {
-      for (const box of tableCellHolder) {
-        box.classList.remove('mobile');
-        box.classList.remove('tablet');
-        box.classList.add('desk');
-        console.log("this is desk");
-      }
+
+      console.log("this is desk");
+      console.log("CALLBACK (min-width: 992px)");
     }
     console.log("window.innerWidth: " + window.innerWidth);
   }
