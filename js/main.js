@@ -39,14 +39,17 @@ console.log(savingsData);
 console.log(benefitsData);
 
 // ----- Set the card data via .innerHTML -----
-const setCardDataHtml = (collectDataList, cardDataType) =>{
-
+const setCardDataHtml = (collectDataList, cardDataType) => {
   for (let index = 0; index < collectDataList.length; index++) {
     const element = collectDataList[index];
-    if (cardDataType === "cardName") { element.innerHTML += cardData[index].cardName; }
-    if (cardDataType === "cardValue") { element.innerHTML += cardData[index].cardValue; }
+    if (cardDataType === "cardName") {
+      element.innerHTML += cardData[index].cardName;
+    }
+    if (cardDataType === "cardValue") {
+      element.innerHTML += cardData[index].cardValue;
+    }
   }
-}
+};
 setCardDataHtml(membershipCardHeadingList, "cardName");
 setCardDataHtml(membershipCardPriceList, "cardValue");
 
@@ -57,10 +60,14 @@ const setCardDataAttr = (collectDataList, cardAttrType) => {
 
   for (let index = 0; index < collectDataList.length; index++) {
     const element = collectDataList[index];
-    if (cardAttrType === "src") { element.src = cardData[index].cardImg; }
-    if (cardAttrType === "href") { element.href = cardData[index].cardLink; }
+    if (cardAttrType === "src") {
+      element.src = cardData[index].cardImg;
+    }
+    if (cardAttrType === "href") {
+      element.href = cardData[index].cardLink;
+    }
   }
-}
+};
 setCardDataAttr(membershipCardImgList, "src");
 setCardDataAttr(membershipCardCtaList, "href");
 
@@ -69,8 +76,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
   let mqls = [
     window.matchMedia("(max-width: 767px)"),
     window.matchMedia("(min-width: 768px) and (max-width: 991px)"),
-    window.matchMedia("(min-width: 992px)")
-  ]
+    window.matchMedia("(min-width: 992px)"),
+  ];
 
   const mqh = () => {
     if (mqls[0].matches) {
@@ -84,10 +91,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       console.log("CALLBACK (min-width: 992px)");
     }
     console.log("window.innerWidth: " + window.innerWidth);
-  }
+  };
 
-  const mappedMq = mqls.map(
-    x => x.addListener(mqh)
-  );
+  const mappedMq = mqls.map((x) => x.addListener(mqh));
   mqh();
 });
