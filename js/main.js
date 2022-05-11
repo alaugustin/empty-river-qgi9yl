@@ -10,11 +10,33 @@ console.log(plusCardData);
 const premierCardData = cardData[3];
 console.log(premierCardData);
 
+const membershipCardHeadingList = document.querySelectorAll( ".membership-card__heading" ),
+  membershipCardPriceList = document.querySelectorAll( ".membership-card__price span" ),
+  membershipCardImgList = document.querySelectorAll( ".membership-card__card-image" ),
+  membershipCardCtaList = document.querySelectorAll( ".compare-cards__cta-container a" );
 
-const membershipCardHeadingList = document.querySelectorAll(".membership-card__heading"),
-  membershipCardPriceList = document.querySelectorAll(".membership-card__price span"),
-  membershipCardImgList = document.querySelectorAll(".membership-card__card-image"),
-  membershipCardCtaList = document.querySelectorAll(".compare-cards__cta-container a");
+const roadsideData = [
+  aLaCardData.roadside,
+  basicCardData.roadside,
+  plusCardData.roadside,
+  premierCardData.roadside,
+];
+const savingsData = [
+  aLaCardData.savings,
+  basicCardData.savings,
+  plusCardData.savings,
+  premierCardData.savings,
+];
+const benefitsData = [
+  aLaCardData.benefits,
+  basicCardData.benefits,
+  plusCardData.benefits,
+  premierCardData.benefits,
+];
+
+console.log(roadsideData);
+console.log(savingsData);
+console.log(benefitsData);
 
 // ----- Set the card data via .innerHTML -----
 const setCardDataHtml = (collectDataList, cardDataType) =>{
@@ -42,12 +64,8 @@ const setCardDataAttr = (collectDataList, cardAttrType) => {
 setCardDataAttr(membershipCardImgList, "src");
 setCardDataAttr(membershipCardCtaList, "href");
 
-
-
-
 // ----- Media query -----
 document.addEventListener("DOMContentLoaded", function (e) {
-
   let mqls = [
     window.matchMedia("(max-width: 767px)"),
     window.matchMedia("(min-width: 768px) and (max-width: 991px)"),
@@ -58,13 +76,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
     if (mqls[0].matches) {
       console.log("this is mobile");
       console.log("CALLBACK (max-width: 767px)");
-
     } else if (mqls[1].matches) {
-
       console.log("this is tablet");
       console.log("CALLBACK (min-width: 768px)");
     } else if (mqls[2].matches) {
-
       console.log("this is desk");
       console.log("CALLBACK (min-width: 992px)");
     }
