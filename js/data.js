@@ -1,8 +1,8 @@
 let cardData = [
   {
-    "cardName": "À la carte",
-    "cardValue": 11,
-    "cardImg": "https://dummyimage.com/600x400/ff0000/fff",
+    "cardName": "A La Carte",
+    "cardValue": 20,
+    "cardImg": "https://caasco.com/-/media/caasco/membership/cards/435x274/membership_card_AlaCarte.jpg",
     "cardLink": "1-877-475-5061",
     "roadside": [],
     "savings": [
@@ -17,7 +17,7 @@ let cardData = [
   },
   {
     "cardName": "Basic",
-    "cardValue": 22,
+    "cardValue": 75,
     "cardImg": "https://www.caasco.com/~/media/caasco/membership/cards/membership_card_Basic.png",
     "cardLink": "https://www.caasco.com/membership/Join?Type=Basic",
     "roadside": [
@@ -44,7 +44,7 @@ let cardData = [
   },
   {
     "cardName": "Plus",
-    "cardValue": 111,
+    "cardValue": 119,
     "cardImg": "https://www.caasco.com/~/media/caasco/membership/cards/membership_card_Plus.png",
     "cardLink": "https://www.caasco.com/membership/Join?Type=Plus",
     "roadside": [
@@ -71,7 +71,7 @@ let cardData = [
   },
   {
     "cardName": "Premier",
-    "cardValue": 222,
+    "cardValue": 149,
     "cardImg": "https://www.caasco.com/~/media/caasco/membership/cards/membership_card_Premier.png",
     "cardLink": "https://www.caasco.com/membership/Join?Type=Premier",
     "roadside": [
