@@ -1,42 +1,19 @@
-const aLaCardData = cardData[0];
-console.log(aLaCardData);
-
-const basicCardData = cardData[1];
-console.log(basicCardData);
-
-const plusCardData = cardData[2];
-console.log(plusCardData);
-
-const premierCardData = cardData[3];
-console.log(premierCardData);
-
-const membershipCardHeadingList = document.querySelectorAll( ".membership-card__heading" ),
+const aLaCardData = cardData[0],
+  basicCardData = cardData[1],
+  plusCardData = cardData[2],
+  premierCardData = cardData[3],
+  membershipCardHeadingList = document.querySelectorAll( ".membership-card__heading" ),
   membershipCardPriceList = document.querySelectorAll( ".membership-card__price span" ),
   membershipCardImgList = document.querySelectorAll( ".membership-card__card-image" ),
-  membershipCardCtaList = document.querySelectorAll( ".compare-cards__cta-container a" );
+  membershipCardCtaList = document.querySelectorAll(".compare-cards__cta-container a"),
+  roadsideAccordionHolder = document.querySelector(".roadside.accordion__content-container .row"),
+  savingsAccordionHolder = document.querySelector(".savings.accordion__content-container .row"),
+  benefitsAccordionHolder = document.querySelector(".benefits.accordion__content-container .row");
 
-const roadsideData = [
-  aLaCardData.roadside,
-  basicCardData.roadside,
-  plusCardData.roadside,
-  premierCardData.roadside,
-];
-const savingsData = [
-  aLaCardData.savings,
-  basicCardData.savings,
-  plusCardData.savings,
-  premierCardData.savings,
-];
-const benefitsData = [
-  aLaCardData.benefits,
-  basicCardData.benefits,
-  plusCardData.benefits,
-  premierCardData.benefits,
-];
-
-console.log(roadsideData);
-console.log(savingsData);
-console.log(benefitsData);
+console.log(aLaCardData);
+console.log(basicCardData);
+console.log(plusCardData);
+console.log(premierCardData);
 
 // ----- Set the card data via .innerHTML -----
 const setCardDataHtml = (collectDataList, cardDataType) => {
@@ -55,9 +32,6 @@ setCardDataHtml(membershipCardPriceList, "cardValue");
 
 // ----- Set the card data via attribute change -----
 const setCardDataAttr = (collectDataList, cardAttrType) => {
-  console.log(collectDataList);
-  console.log(cardAttrType);
-
   for (let index = 0; index < collectDataList.length; index++) {
     const element = collectDataList[index];
     if (cardAttrType === "src") {
@@ -70,6 +44,46 @@ const setCardDataAttr = (collectDataList, cardAttrType) => {
 };
 setCardDataAttr(membershipCardImgList, "src");
 setCardDataAttr(membershipCardCtaList, "href");
+
+const roadsideData = [
+    aLaCardData.roadside,
+    basicCardData.roadside,
+    plusCardData.roadside,
+    premierCardData.roadside,
+  ],
+  savingsData = [
+    aLaCardData.savings,
+    basicCardData.savings,
+    plusCardData.savings,
+    premierCardData.savings,
+  ],
+  benefitsData = [
+    aLaCardData.benefits,
+    basicCardData.benefits,
+    plusCardData.benefits,
+    premierCardData.benefits,
+  ];
+
+const transposeCardData = (accordionData) => {
+  const transposedArray = accordionData[0].map(
+    (_, colIndex) => accordionData.map(row => row[colIndex])
+  );
+
+  const accordionRow = transposedArray.map(
+    x => `
+    <div class="aLaCarte d-none d-lg-block col-6 col-md-4 col-lg-3 rich-text">${x[0]}</div>
+    <div class="basic col-6 col-md-4 col-lg-3 rich-text">${x[1]}</div>
+    <div class="plus col-6 col-md-4 col-lg-3 rich-text">${x[2]}</div>
+    <div class="premier d-none d-md-block col-6 col-md-4 col-lg-3 rich-text">${x[3]}</div>
+    `
+  ).join("");
+
+  return accordionRow;
+}
+
+roadsideAccordionHolder.innerHTML = transposeCardData(roadsideData);
+savingsAccordionHolder.innerHTML = transposeCardData(savingsData);
+benefitsAccordionHolder.innerHTML = transposeCardData(benefitsData);
 
 // ----- Media query -----
 document.addEventListener("DOMContentLoaded", function (e) {

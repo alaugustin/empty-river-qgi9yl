@@ -4,8 +4,8 @@ let cardData = [
     cardValue: 20,
     cardImg:
       "https://caasco.com/-/media/caasco/membership/cards/435x274/membership_card_AlaCarte.jpg",
-    cardLink: "1-877-475-5061",
-    roadside: ["", "", "", "", "", "", ""],
+    cardLink: "tel:1-877-475-5061",
+    roadside: ["-", "-", "-", "-", "-", "-", "-"],
     savings: [
       "Member pricing on Canadian passport photos",
       "Member pricing on merchandise online with shopwithcaa.com and in CAA Stores⁴",
@@ -14,9 +14,9 @@ let cardData = [
     ],
     benefits: [
       "Unlimited general practitioner consults per year at a 20% discounted rate with Maple",
-      "",
-      "",
-      "",
+      "-",
+      "-",
+      "-",
     ],
   },
   {
@@ -43,8 +43,8 @@ let cardData = [
     benefits: [
       "Unlimited general practitioner consults per year at a 20% discounted rate with Maple",
       "Road Trip Accident Assistance⁵",
-      "",
-      "",
+      "-",
+      "-",
     ],
   },
   {
@@ -71,8 +71,8 @@ let cardData = [
     benefits: [
       "2 free general practitioner consults per year with Maple",
       "Road Trip Accident Assistance⁵",
-      "",
-      "",
+      "-",
+      "-",
     ],
   },
   {
