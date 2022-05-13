@@ -38,7 +38,8 @@ const setCardDataAttr = (collectDataList, cardAttrType) => {
       element.src = cardData[index].cardImg;
     }
     if (cardAttrType === "href") {
-      element.href = cardData[index].cardLink;
+      element.href = cardData[index].cardLink.url;
+      element.innerHTML = cardData[index].cardLink.label;
     }
   }
 };
