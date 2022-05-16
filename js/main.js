@@ -6,9 +6,9 @@ const aLaCardData = cardData[0],
   membershipCardPriceList = document.querySelectorAll( ".membership-card__price span" ),
   membershipCardImgList = document.querySelectorAll( ".membership-card__card-image" ),
   membershipCardCtaList = document.querySelectorAll(".compare-cards__cta-container a"),
-  roadsideAccordionHolder = document.querySelector(".roadside.accordion__content-container"),
-  savingsAccordionHolder = document.querySelector(".savings.accordion__content-container"),
-  benefitsAccordionHolder = document.querySelector(".benefits.accordion__content-container");
+  roadsideAccordionHolder = document.querySelector(".roadside.accordion__content-container .accordion__complex-row"),
+  savingsAccordionHolder = document.querySelector(".savings.accordion__content-container .accordion__complex-row"),
+  benefitsAccordionHolder = document.querySelector(".benefits.accordion__content-container .accordion__complex-row");
 
 console.log(aLaCardData);
 console.log(basicCardData);
