@@ -10,14 +10,14 @@ const aLaCardData = cardData[0],
   savingsAccordionHolder = document.querySelector(".savings.accordion__content-container .accordion__complex-row"),
   benefitsAccordionHolder = document.querySelector(".benefits.accordion__content-container .accordion__complex-row");
 
-console.log(aLaCardData);
-console.log(basicCardData);
-console.log(plusCardData);
-console.log(premierCardData);
+// console.log(aLaCardData);
+// console.log(basicCardData);
+// console.log(plusCardData);
+// console.log(premierCardData);
 
 // ----- Set the card data via .innerHTML -----
 const setCardDataHtml = (collectDataList, cardDataType) => {
-  for (let index = 0; index < collectDataList.length; index++) {
+  collectDataList.forEach((collectDataListItem, index) => {
     const element = collectDataList[index];
     if (cardDataType === "cardName") {
       element.innerHTML += cardData[index].cardName;
@@ -25,14 +25,14 @@ const setCardDataHtml = (collectDataList, cardDataType) => {
     if (cardDataType === "cardValue") {
       element.innerHTML += cardData[index].cardValue;
     }
-  }
+  });
 };
 setCardDataHtml(membershipCardHeadingList, "cardName");
 setCardDataHtml(membershipCardPriceList, "cardValue");
 
 // ----- Set the card data via attribute change -----
 const setCardDataAttr = (collectDataList, cardAttrType) => {
-  for (let index = 0; index < collectDataList.length; index++) {
+  collectDataList.forEach((collectDataListItem, index) => {
     const element = collectDataList[index];
     if (cardAttrType === "src") {
       element.src = cardData[index].cardImg;
@@ -41,7 +41,7 @@ const setCardDataAttr = (collectDataList, cardAttrType) => {
       element.href = cardData[index].cardLink.url;
       element.innerHTML = cardData[index].cardLink.label;
     }
-  }
+  });
 };
 setCardDataAttr(membershipCardImgList, "src");
 setCardDataAttr(membershipCardCtaList, "href");
