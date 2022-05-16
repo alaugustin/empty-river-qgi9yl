@@ -5,10 +5,10 @@ let cardData = [
     cardImg:
       "https://caasco.com/-/media/caasco/membership/cards/435x274/membership_card_AlaCarte.jpg",
     cardLink: {
-      "url": "tel:1-877-475-5061",
-      "label": "Call 1-877-475-5061",
+      url: "tel:1-877-475-5061",
+      label: "Call 1-877-475-5061",
     },
-    roadside: ["", "", "", "", "", "", ""],
+    roadside: ["—", "—", "—", "—", "—", "—", "—"],
     savings: [
       "Member pricing on Canadian passport photos",
       "Member pricing on merchandise online with shopwithcaa.com and in CAA Stores<sup>4</sup>",
@@ -17,9 +17,9 @@ let cardData = [
     ],
     benefits: [
       "Unlimited general practitioner consults per year at a 20% discounted rate with Maple",
-      "",
-      "",
-      "",
+      "—",
+      "—",
+      "—",
     ],
   },
   {
@@ -28,8 +28,8 @@ let cardData = [
     cardImg:
       "https://www.caasco.com/~/media/caasco/membership/cards/membership_card_Basic.png",
     cardLink: {
-      "url": "https://www.caasco.com/membership/Join?Type=Basic",
-      "label": "Join Now",
+      url: "https://www.caasco.com/membership/Join?Type=Basic",
+      label: "Join Now",
     },
     roadside: [
       "Four service calls",
@@ -49,8 +49,8 @@ let cardData = [
     benefits: [
       "Unlimited general practitioner consults per year at a 20% discounted rate with Maple",
       "Road Trip Accident Assistance<sup>5</sup>",
-      "",
-      "",
+      "—",
+      "—",
     ],
   },
   {
@@ -59,8 +59,8 @@ let cardData = [
     cardImg:
       "https://www.caasco.com/~/media/caasco/membership/cards/membership_card_Plus.png",
     cardLink: {
-      "url": "https://www.caasco.com/membership/Join?Type=Basic",
-      "label": "Join Now",
+      url: "https://www.caasco.com/membership/Join?Type=Basic",
+      label: "Join Now",
     },
     roadside: [
       "Four service calls",
@@ -80,8 +80,8 @@ let cardData = [
     benefits: [
       "2 free general practitioner consults per year with Maple",
       "Road Trip Accident Assistance<sup>5</sup>",
-      "",
-      "",
+      "—",
+      "—",
     ],
   },
   {
@@ -90,8 +90,8 @@ let cardData = [
     cardImg:
       "https://www.caasco.com/~/media/caasco/membership/cards/membership_card_Premier.png",
     cardLink: {
-      "url": "https://www.caasco.com/membership/Join?Type=Basic",
-      "label": "Join Now",
+      url: "https://www.caasco.com/membership/Join?Type=Basic",
+      label: "Join Now",
     },
     roadside: [
       "Five service calls",

@@ -6,9 +6,9 @@ const aLaCardData = cardData[0],
   membershipCardPriceList = document.querySelectorAll( ".membership-card__price span" ),
   membershipCardImgList = document.querySelectorAll( ".membership-card__card-image" ),
   membershipCardCtaList = document.querySelectorAll(".compare-cards__cta-container a"),
-  roadsideAccordionHolder = document.querySelector(".roadside.accordion__content-container .row"),
-  savingsAccordionHolder = document.querySelector(".savings.accordion__content-container .row"),
-  benefitsAccordionHolder = document.querySelector(".benefits.accordion__content-container .row");
+  roadsideAccordionHolder = document.querySelector(".roadside.accordion__content-container"),
+  savingsAccordionHolder = document.querySelector(".savings.accordion__content-container"),
+  benefitsAccordionHolder = document.querySelector(".benefits.accordion__content-container");
 
 console.log(aLaCardData);
 console.log(basicCardData);
@@ -46,6 +46,7 @@ const setCardDataAttr = (collectDataList, cardAttrType) => {
 setCardDataAttr(membershipCardImgList, "src");
 setCardDataAttr(membershipCardCtaList, "href");
 
+// ----- Set the card accordion data -----
 const roadsideData = [
     aLaCardData.roadside,
     basicCardData.roadside,
@@ -65,22 +66,33 @@ const roadsideData = [
     premierCardData.benefits,
   ];
 
+const rowParity = (rowParity, transposedArrayItem) => {
+  return `
+    <div class="row ${rowParity}">
+      <div class="aLaCarte d-none d-lg-block col-6 col-md-4 col-lg-3 rich-text">${transposedArrayItem[0]}</div>
+      <div class="basic col-6 col-md-4 col-lg-3 rich-text">${transposedArrayItem[1]}</div>
+      <div class="plus col-6 col-md-4 col-lg-3 rich-text">${transposedArrayItem[2]}</div>
+      <div class="premier d-none d-md-block col-6 col-md-4 col-lg-3 rich-text">${transposedArrayItem[3]}</div>
+    </div>
+  `;
+};
+
 const transposeCardData = (accordionData) => {
-  const transposedArray = accordionData[0].map(
-    (_, colIndex) => accordionData.map(row => row[colIndex])
+  const transposedArray = accordionData[0].map((_, colIndex) =>
+    accordionData.map((row) => row[colIndex])
   );
 
-  const accordionRow = transposedArray.map(
-    x => `
-    <div class="aLaCarte d-none d-lg-block col-6 col-md-4 col-lg-3 rich-text">${x[0]}</div>
-    <div class="basic col-6 col-md-4 col-lg-3 rich-text">${x[1]}</div>
-    <div class="plus col-6 col-md-4 col-lg-3 rich-text">${x[2]}</div>
-    <div class="premier d-none d-md-block col-6 col-md-4 col-lg-3 rich-text">${x[3]}</div>
-    `
-  ).join("");
+  const accordionRow = transposedArray
+    .map((transposedArrayItem, index) => {
+      if (index % 2 === 0) {
+        return rowParity("even", transposedArrayItem);
+      } else {
+        return rowParity("odd", transposedArrayItem);
+      }
+    }).join("");
 
   return accordionRow;
-}
+};
 
 roadsideAccordionHolder.innerHTML = transposeCardData(roadsideData);
 savingsAccordionHolder.innerHTML = transposeCardData(savingsData);
