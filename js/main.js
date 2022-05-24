@@ -75,7 +75,6 @@ let compareMembership = {
   },
 
   onDomReady: () => {
-    console.log("on DOM ready");
     compareMembership.setCardDataHtml(compareMembership.config.membershipCardHeadingList, "cardName");
     compareMembership.setCardDataHtml(compareMembership.config.membershipCardPriceList, "cardValue");
     compareMembership.setCardDataAttr(compareMembership.config.membershipCardImgList, "src");
@@ -85,9 +84,10 @@ let compareMembership = {
     compareMembership.config.benefitsAccordionHolder.innerHTML = compareMembership.transposeCardData(benefitsData);
     compareMembership.setDropdownItems();
 
-    console.log(compareMembership.config);
+    // console.log(compareMembership.config);
   },
 
+  // ----- Set the column select data -----
   setDropdownItems: () => {
     const compMemConfig = compareMembership.config,
       compareSelectBoxListArray = [].slice.call(compMemConfig.compareSelectBoxList),
@@ -96,7 +96,7 @@ let compareMembership = {
 
     compareSelectBoxListArray.map(
       (selectBox, index) => selectBox.innerHTML = (`
-        <option value="${cardSelectValue[index]}">${cardList[index]}</option>
+        <option value="${cardSelectValue[index]}" selected="selected">${cardList[index]}</option>
         <option value="${cardSelectValue[0]}">${cardList[0]}</option>
       `)
     )
@@ -130,6 +130,7 @@ let compareMembership = {
     });
   },
 
+  // ----- Set accordion row parity -----
   rowParity: (rowParity, transposedArrayItem) => {
     return (
       `<div class="row ${rowParity}">
@@ -141,6 +142,7 @@ let compareMembership = {
     );
   },
 
+  // ----- Transpose card data -----
   transposeCardData: (accordionData) => {
     const transposedArray = accordionData[0].map((_, colIndex) =>
       accordionData.map((row) => row[colIndex])
@@ -177,40 +179,8 @@ window.addEventListener("load", () => {
 
 
 
-// const getNumberOfColumns = () => {
-//   const compareMembershipTopList = document.querySelectorAll(".compare-membership__top .row > div");
-//   const divsArray = [].slice.call(compareMembershipTopList);
-//   const displayNone = divsArray.filter(function (el) {
-//     return getComputedStyle(el).display === "none";
-//   });
-//   //and all divs that are not display none
-//   const displayShow = divsArray.filter(function (el) {
-//     return getComputedStyle(el).display !== "none";
-//   });
 
-//   displayShow.map(
-//     x => console.log(x);
-//     x => x.style.backgroundColor = "red"
-//   )
-
-//   console.log(displayShow);
-//   const numberOfHiddenDivs = displayNone.length;
-//   const numberOfVisibleDivs = displayShow.length;
-
-//   console.log(numberOfHiddenDivs);
-//   console.log(numberOfVisibleDivs);
-// }
-// getNumberOfColumns();
-
-// const populateDropdown = () => {
-//   const dropDownLabels = ['aLaCardData.cardName', 'basicCardData.cardName', 'plusCardData.cardName', 'premierCardData.cardName'];
-//   // const dropDownLabels = [aLaCardData.cardName, basicCardData.cardName, plusCardData.cardName, premierCardData.cardName];
-//   console.log(compareSelectBoxList);
-//   console.log(dropDownLabels);
-// }
-// populateDropdown();
-
-  // ----- Media query -----
+// ----- Media query -----
 // document.addEventListener("DOMContentLoaded", function (e) {
 //   let mqls = [
 //     window.matchMedia("(max-width: 767px)"),
