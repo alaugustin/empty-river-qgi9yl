@@ -72,6 +72,10 @@ let compareMembership = {
     // CALL DOM INVOKING FUNCTIONS HERE --------------------
     compareMembership.onDomReady();
     compareMembership.eventHandlers();
+  },
+
+  onDomReady: () => {
+    console.log("on DOM ready");
     compareMembership.setCardDataHtml(compareMembership.config.membershipCardHeadingList, "cardName");
     compareMembership.setCardDataHtml(compareMembership.config.membershipCardPriceList, "cardValue");
     compareMembership.setCardDataAttr(compareMembership.config.membershipCardImgList, "src");
@@ -82,10 +86,6 @@ let compareMembership = {
     compareMembership.setDropdownItems();
 
     console.log(compareMembership.config);
-  },
-
-  onDomReady: () => {
-    console.log("on DOM ready");
   },
 
   setDropdownItems: () => {
