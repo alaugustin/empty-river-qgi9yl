@@ -37,7 +37,6 @@ let compareMembership = {
 
     // GLOBAL VARIABLES --------------------
     context.config = {
-      abc: "test",
       aLaCardData: cardData[0],
       basicCardData: cardData[1],
       plusCardData: cardData[2],
@@ -92,14 +91,16 @@ let compareMembership = {
   setDropdownItems: () => {
     const compMemConfig = compareMembership.config,
       compareSelectBoxListArray = [].slice.call(compMemConfig.compareSelectBoxList),
-      cardList = [compMemConfig.aLaCardData.cardName, compMemConfig.basicCardData.cardName, compMemConfig.plusCardData.cardName, compMemConfig.premierCardData.cardName];
+      cardList = [compMemConfig.aLaCardData.cardName, compMemConfig.basicCardData.cardName, compMemConfig.plusCardData.cardName, compMemConfig.premierCardData.cardName],
+      cardSelectValue = [compMemConfig.aLaCardData.selectValue, compMemConfig.basicCardData.selectValue, compMemConfig.plusCardData.selectValue, compMemConfig.premierCardData.selectValue];
 
     compareSelectBoxListArray.map(
-      (x, index) => x.innerHTML = `
-        <option>${cardList[index]}</option>
-        <option>${cardList[0]}</option>
-      `
+      (selectBox, index) => selectBox.innerHTML = (`
+        <option value="${cardSelectValue[index]}">${cardList[index]}</option>
+        <option value="${cardSelectValue[0]}">${cardList[0]}</option>
+      `)
     )
+    compareMembership.changDropdownselection(compareSelectBoxListArray);
   },
 
   // ----- Set the card data via .innerHTML -----
@@ -158,8 +159,8 @@ let compareMembership = {
   },
 
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
-  fooooooooo: () => {
-    console.log("fjknvkdjnvdkjvndkfljnvkefjnvkljdnvjkdfnvkjf");
+  changDropdownselection: (compareSelectBoxListArray) => {
+    console.log(compareSelectBoxListArray)
   },
   eventHandlers: () => {
     console.log("event handlers");

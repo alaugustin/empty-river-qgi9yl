@@ -8,6 +8,7 @@ let cardData = [
       url: "tel:1-877-475-5061",
       label: "Call 1-877-475-5061",
     },
+    selectValue: "aLaCarte",
     roadside: ["—", "—", "—", "—", "—", "—", "—"],
     savings: [
       "Member pricing on Canadian passport photos",
@@ -31,6 +32,7 @@ let cardData = [
       url: "https://www.caasco.com/membership/Join?Type=Basic",
       label: "Join Now",
     },
+    selectValue: "basic",
     roadside: [
       "Four service calls",
       "Towing distance of 10 km per call<sup>1</sup>",
@@ -62,6 +64,7 @@ let cardData = [
       url: "https://www.caasco.com/membership/Join?Type=Basic",
       label: "Join Now",
     },
+    selectValue: "plus",
     roadside: [
       "Four service calls",
       "Towing distance of 200 km per call<sup>1</sup>",
@@ -93,6 +96,7 @@ let cardData = [
       url: "https://www.caasco.com/membership/Join?Type=Basic",
       label: "Join Now",
     },
+    selectValue: "premier",
     roadside: [
       "Five service calls",
       "Towing distance of 320 km on one call and 200 km on four calls<sup>1</sup>",
