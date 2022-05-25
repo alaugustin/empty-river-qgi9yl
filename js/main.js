@@ -84,23 +84,83 @@ let compareMembership = {
     compareMembership.config.roadsideAccordionHolder.innerHTML = compareMembership.transposeCardData(roadsideData);
     compareMembership.config.savingsAccordionHolder.innerHTML = compareMembership.transposeCardData(savingsData);
     compareMembership.config.benefitsAccordionHolder.innerHTML = compareMembership.transposeCardData(benefitsData);
-    // compareMembership.setDropdownItems();
+    // compareMembership.changDropdownselection();
 
     // console.log(compareMembership.config);
+  },
+  twoColInit: (columnsDisplayBlock) => {
+    console.log("it's 2 columns init");
+    const columnA = columnsDisplayBlock[0],
+      columnAplus = columnA.querySelectorAll("option")[2],
+      columnB = columnsDisplayBlock[1],
+      columnBbasic = columnB.querySelectorAll("option")[1];
+
+    columnAplus.setAttribute("disabled", true);
+    columnAplus.setAttribute("hidden", true);
+    columnAplus.setAttribute("aria-hidden", true);
+    columnAplus.setAttribute("class", "d-none");
+
+    columnBbasic.setAttribute("disabled", true);
+    columnBbasic.setAttribute("hidden", true);
+    columnBbasic.setAttribute("aria-hidden", true);
+    columnBbasic.setAttribute("class", "d-none");
+  },
+  threeColInit: (columnsDisplayBlock) => {
+    console.log("it's 3 columns init");
+    const columnA = columnsDisplayBlock[0],
+      columnAplus = columnA.querySelectorAll("option")[2],
+      columnApremier = columnA.querySelectorAll("option")[3],
+      columnB = columnsDisplayBlock[1],
+      columnBbasic = columnB.querySelectorAll("option")[1],
+      columnBpremier = columnB.querySelectorAll("option")[3],
+      columnC = columnsDisplayBlock[2],
+      columnCBasic = columnC.querySelectorAll("option")[1],
+      columnCplus = columnC.querySelectorAll("option")[2]
+
+    columnAplus.setAttribute("disabled", true);
+    columnAplus.setAttribute("hidden", true);
+    columnAplus.setAttribute("aria-hidden", true);
+    columnAplus.setAttribute("class", "d-none");
+
+    columnApremier.setAttribute("disabled", true);
+    columnApremier.setAttribute("hidden", true);
+    columnApremier.setAttribute("aria-hidden", true);
+    columnApremier.setAttribute("class", "d-none");
+
+    columnBbasic.setAttribute("disabled", true);
+    columnBbasic.setAttribute("hidden", true);
+    columnBbasic.setAttribute("aria-hidden", true);
+    columnBbasic.setAttribute("class", "d-none");
+
+    columnBpremier.setAttribute("disabled", true);
+    columnBpremier.setAttribute("hidden", true);
+    columnBpremier.setAttribute("aria-hidden", true);
+    columnBpremier.setAttribute("class", "d-none");
+
+    columnCBasic.setAttribute("disabled", true);
+    columnCBasic.setAttribute("hidden", true);
+    columnCBasic.setAttribute("aria-hidden", true);
+    columnCBasic.setAttribute("class", "d-none");
+
+    columnCplus.setAttribute("disabled", true);
+    columnCplus.setAttribute("hidden", true);
+    columnCplus.setAttribute("aria-hidden", true);
+    columnCplus.setAttribute("class", "d-none");
   },
 
   // ----- Is the page two or three columns -----
   twoOrThreeColumnsVisible: () => {
     const columnCollection = compareMembership.config.topRowColumnsList,
       columnCollectionArray = [].slice.call(columnCollection),
-      columnsDisplayNone = columnCollectionArray.filter((el) => {return getComputedStyle(el).display === "none"});
+      columnsDisplayNone = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "none" }),
+      columnsDisplayBlock = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "block" });
     // ----- Three columns -----
     if (columnsDisplayNone.length == 1) {
-      console.log(`it's ${columnsDisplayNone.length+2} column`);
+      compareMembership.threeColInit(columnsDisplayBlock);
     }
     // ----- Two columns -----
     if (columnsDisplayNone.length == 2) {
-      console.log(`it's ${columnsDisplayNone.length} column`);
+      compareMembership.twoColInit(columnsDisplayBlock);
     }
   },
 
@@ -162,67 +222,9 @@ let compareMembership = {
   },
 
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
-  changDropdownselection: (compareSelectBoxListArray) => {
-
-    // compareSelectBoxListArray.map(
-    //   (selectBoxCollection, index) => {
-    //     selectBoxCollection.addEventListener('change', (event) => {
-
-    //       const toggleSelectOptions = () => {
-    //         const targetSelectBox = event.target;
-
-    //         // console.log(event);
-    //         // console.log(targetSelectBox);
-    //         // console.log(targetSelectBox.options[0]);
-    //         // console.log(targetSelectBox.options[1]);
-
-    //         compareSelectBoxListArray.map(
-    //           x => {
-    //             if (x.id == targetSelectBox.id) {
-    //               return;
-    //             } else {
-    //               // console.log(x.options[1]);
-    //               x.options[0].value = targetSelectBox.options[1].value;
-    //               x.options[0].innerHTML = targetSelectBox.options[1].innerHTML;
-    //               x.options[1].value = targetSelectBox.options[0].value;
-    //               x.options[1].innerHTML = targetSelectBox.options[0].innerHTML;
-    //             }
-    //             // console.log(x);
-    //           }
-    //         )
-    //       }
-
-    //       toggleSelectOptions();
-
-    //       switch (event.target.value) {
-    //         case 'aLaCarte':
-    //           toggleSelectOptions();
-
-    //           break;
-
-    //         case 'basic':
-    //           toggleSelectOptions();
-
-    //           break;
-
-    //         case 'plus':
-    //           toggleSelectOptions();
-
-    //           break;
-
-    //         case 'premier':
-    //           toggleSelectOptions();
-
-    //           break;
-
-    //         default:
-    //           console.log('incorrect selection');
-    //           break;
-    //       }
-    //     });
-    //   }
-    // )
-  },
+  // changDropdownselection: () => {
+  //   console.log('changDropdownselection() executed');
+  // },
   eventHandlers: () => {
     window.addEventListener('resize', function (event) {
       compareMembership.twoOrThreeColumnsVisible();
