@@ -41,6 +41,7 @@ let compareMembership = {
       basicCardData: cardData[1],
       plusCardData: cardData[2],
       premierCardData: cardData[3],
+      topRowColumnsList: document.querySelectorAll(".compare-membership__top .row > div"),
       compareSelectBoxList: document.querySelectorAll(".compare-membership__top select"),
       membershipCardHeadingList: document.querySelectorAll(".membership-card__heading"),
       membershipCardPriceList: document.querySelectorAll(".membership-card__price span"),
@@ -75,6 +76,7 @@ let compareMembership = {
   },
 
   onDomReady: () => {
+    compareMembership.twoOrThreeColumnsVisible();
     compareMembership.setCardDataHtml(compareMembership.config.membershipCardHeadingList, "cardName");
     compareMembership.setCardDataHtml(compareMembership.config.membershipCardPriceList, "cardValue");
     compareMembership.setCardDataAttr(compareMembership.config.membershipCardImgList, "src");
@@ -87,21 +89,20 @@ let compareMembership = {
     // console.log(compareMembership.config);
   },
 
-  // ----- Set the column select data -----
-  // setDropdownItems: () => {
-  //   const compMemConfig = compareMembership.config,
-  //     compareSelectBoxListArray = [].slice.call(compMemConfig.compareSelectBoxList),
-  //     cardList = [compMemConfig.aLaCardData.cardName, compMemConfig.basicCardData.cardName, compMemConfig.plusCardData.cardName, compMemConfig.premierCardData.cardName],
-  //     cardSelectValue = [compMemConfig.aLaCardData.selectValue, compMemConfig.basicCardData.selectValue, compMemConfig.plusCardData.selectValue, compMemConfig.premierCardData.selectValue];
-
-  //   compareSelectBoxListArray.map(
-  //     (selectBox, index) => selectBox.innerHTML = (`
-  //       <option value="${cardSelectValue[index]}" selected="selected">${cardList[index]}</option>
-  //       <option value="${cardSelectValue[0]}">${cardList[0]}</option>
-  //     `)
-  //   )
-  //   compareMembership.changDropdownselection(compareSelectBoxListArray);
-  // },
+  // ----- Is the page two or three columns -----
+  twoOrThreeColumnsVisible: () => {
+    const columnCollection = compareMembership.config.topRowColumnsList,
+      columnCollectionArray = [].slice.call(columnCollection),
+      columnsDisplayNone = columnCollectionArray.filter((el) => {return getComputedStyle(el).display === "none"});
+    // ----- Three columns -----
+    if (columnsDisplayNone.length == 1) {
+      console.log(`it's ${columnsDisplayNone.length+2} column`);
+    }
+    // ----- Two columns -----
+    if (columnsDisplayNone.length == 2) {
+      console.log(`it's ${columnsDisplayNone.length} column`);
+    }
+  },
 
   // ----- Set the card data via .innerHTML -----
   setCardDataHtml: (collectDataList, cardDataType) => {
@@ -223,7 +224,9 @@ let compareMembership = {
     // )
   },
   eventHandlers: () => {
-    console.log("event handlers");
+    window.addEventListener('resize', function (event) {
+      compareMembership.twoOrThreeColumnsVisible();
+    }, true);
   },
 };
 
