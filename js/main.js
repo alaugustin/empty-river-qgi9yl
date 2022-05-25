@@ -82,26 +82,26 @@ let compareMembership = {
     compareMembership.config.roadsideAccordionHolder.innerHTML = compareMembership.transposeCardData(roadsideData);
     compareMembership.config.savingsAccordionHolder.innerHTML = compareMembership.transposeCardData(savingsData);
     compareMembership.config.benefitsAccordionHolder.innerHTML = compareMembership.transposeCardData(benefitsData);
-    compareMembership.setDropdownItems();
+    // compareMembership.setDropdownItems();
 
     // console.log(compareMembership.config);
   },
 
   // ----- Set the column select data -----
-  setDropdownItems: () => {
-    const compMemConfig = compareMembership.config,
-      compareSelectBoxListArray = [].slice.call(compMemConfig.compareSelectBoxList),
-      cardList = [compMemConfig.aLaCardData.cardName, compMemConfig.basicCardData.cardName, compMemConfig.plusCardData.cardName, compMemConfig.premierCardData.cardName],
-      cardSelectValue = [compMemConfig.aLaCardData.selectValue, compMemConfig.basicCardData.selectValue, compMemConfig.plusCardData.selectValue, compMemConfig.premierCardData.selectValue];
+  // setDropdownItems: () => {
+  //   const compMemConfig = compareMembership.config,
+  //     compareSelectBoxListArray = [].slice.call(compMemConfig.compareSelectBoxList),
+  //     cardList = [compMemConfig.aLaCardData.cardName, compMemConfig.basicCardData.cardName, compMemConfig.plusCardData.cardName, compMemConfig.premierCardData.cardName],
+  //     cardSelectValue = [compMemConfig.aLaCardData.selectValue, compMemConfig.basicCardData.selectValue, compMemConfig.plusCardData.selectValue, compMemConfig.premierCardData.selectValue];
 
-    compareSelectBoxListArray.map(
-      (selectBox, index) => selectBox.innerHTML = (`
-        <option value="${cardSelectValue[index]}" selected="selected">${cardList[index]}</option>
-        <option value="${cardSelectValue[0]}">${cardList[0]}</option>
-      `)
-    )
-    compareMembership.changDropdownselection(compareSelectBoxListArray);
-  },
+  //   compareSelectBoxListArray.map(
+  //     (selectBox, index) => selectBox.innerHTML = (`
+  //       <option value="${cardSelectValue[index]}" selected="selected">${cardList[index]}</option>
+  //       <option value="${cardSelectValue[0]}">${cardList[0]}</option>
+  //     `)
+  //   )
+  //   compareMembership.changDropdownselection(compareSelectBoxListArray);
+  // },
 
   // ----- Set the card data via .innerHTML -----
   setCardDataHtml: (collectDataList, cardDataType) => {
@@ -162,7 +162,65 @@ let compareMembership = {
 
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
   changDropdownselection: (compareSelectBoxListArray) => {
-    console.log(compareSelectBoxListArray)
+
+    // compareSelectBoxListArray.map(
+    //   (selectBoxCollection, index) => {
+    //     selectBoxCollection.addEventListener('change', (event) => {
+
+    //       const toggleSelectOptions = () => {
+    //         const targetSelectBox = event.target;
+
+    //         // console.log(event);
+    //         // console.log(targetSelectBox);
+    //         // console.log(targetSelectBox.options[0]);
+    //         // console.log(targetSelectBox.options[1]);
+
+    //         compareSelectBoxListArray.map(
+    //           x => {
+    //             if (x.id == targetSelectBox.id) {
+    //               return;
+    //             } else {
+    //               // console.log(x.options[1]);
+    //               x.options[0].value = targetSelectBox.options[1].value;
+    //               x.options[0].innerHTML = targetSelectBox.options[1].innerHTML;
+    //               x.options[1].value = targetSelectBox.options[0].value;
+    //               x.options[1].innerHTML = targetSelectBox.options[0].innerHTML;
+    //             }
+    //             // console.log(x);
+    //           }
+    //         )
+    //       }
+
+    //       toggleSelectOptions();
+
+    //       switch (event.target.value) {
+    //         case 'aLaCarte':
+    //           toggleSelectOptions();
+
+    //           break;
+
+    //         case 'basic':
+    //           toggleSelectOptions();
+
+    //           break;
+
+    //         case 'plus':
+    //           toggleSelectOptions();
+
+    //           break;
+
+    //         case 'premier':
+    //           toggleSelectOptions();
+
+    //           break;
+
+    //         default:
+    //           console.log('incorrect selection');
+    //           break;
+    //       }
+    //     });
+    //   }
+    // )
   },
   eventHandlers: () => {
     console.log("event handlers");
