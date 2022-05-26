@@ -84,19 +84,17 @@ let compareMembership = {
     compareMembership.config.roadsideAccordionHolder.innerHTML = compareMembership.transposeCardData(roadsideData);
     compareMembership.config.savingsAccordionHolder.innerHTML = compareMembership.transposeCardData(savingsData);
     compareMembership.config.benefitsAccordionHolder.innerHTML = compareMembership.transposeCardData(benefitsData);
-    // compareMembership.changDropdownselection();
 
     // console.log(compareMembership.config);
   },
 
   setOptionAttrHide: (targetColumnAndOption) => {
     targetColumnAndOption.setAttribute("disabled", true);
-    targetColumnAndOption.setAttribute("hidden", true);
     targetColumnAndOption.setAttribute("aria-hidden", true);
-    targetColumnAndOption.setAttribute("class", "d-none");
   },
+
   twoColInit: (columnsDisplayBlock) => {
-    console.log("it's 2 columns init");
+    console.log("it's twoColInit");
     const columnA = columnsDisplayBlock[0],
       columnAplus = columnA.querySelectorAll("option")[2],
       columnB = columnsDisplayBlock[1],
@@ -105,8 +103,9 @@ let compareMembership = {
     compareMembership.setOptionAttrHide(columnAplus);
     compareMembership.setOptionAttrHide(columnBbasic);
   },
+
   threeColInit: (columnsDisplayBlock) => {
-    console.log("it's 3 columns init");
+    console.log("it's threeColInit");
     const columnA = columnsDisplayBlock[0],
       columnAplus = columnA.querySelectorAll("option")[2],
       columnApremier = columnA.querySelectorAll("option")[3],
@@ -203,8 +202,8 @@ let compareMembership = {
   //   console.log('changDropdownselection() executed');
   // },
   eventHandlers: () => {
-    window.addEventListener('resize', function (event) {
-      compareMembership.twoOrThreeColumnsVisible();
+    window.addEventListener('resize', (event) => {
+      compareMembership.twoOrThreeColumnsVisible(event);
     }, true);
   },
 };
