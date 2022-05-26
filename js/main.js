@@ -123,11 +123,12 @@ let compareMembership = {
     compareMembership.setOptionAttrHide(columnCBasic);
     compareMembership.setOptionAttrHide(columnCplus);
   },
+
   twoCols: () => {
-    console.log("it's 2 columns init");
+    console.log("it's 2 columns");
   },
   threeCols: () => {
-    console.log("it's 3 columns init");
+    console.log("it's 3 columns");
   },
 
   // ----- Is the page two or three columns -----
@@ -202,9 +203,21 @@ let compareMembership = {
   //   console.log('changDropdownselection() executed');
   // },
   eventHandlers: () => {
-    window.addEventListener('resize', (event) => {
-      compareMembership.twoOrThreeColumnsVisible(event);
-    }, true);
+    const compareSelectBoxList = compareMembership.config.compareSelectBoxList,
+      compareSelectBoxListArray = [].slice.call(compareSelectBoxList);
+
+      window.addEventListener('resize', (event) => {
+        compareMembership.twoOrThreeColumnsVisible(event);
+      }, true);
+
+      compareSelectBoxListArray.map(
+      selectBox => {
+        // console.log(x);
+        selectBox.addEventListener('change', () => {
+          console.log(selectBox.value);
+        }, true);
+      }
+    );
   },
 };
 
