@@ -88,6 +88,12 @@ let compareMembership = {
 
     // console.log(compareMembership.config);
   },
+  setOptionAttr: (targetColumnAndOption) => {
+    targetColumnAndOption.setAttribute("disabled", true);
+    targetColumnAndOption.setAttribute("hidden", true);
+    targetColumnAndOption.setAttribute("aria-hidden", true);
+    targetColumnAndOption.setAttribute("class", "d-none");
+  },
   twoColInit: (columnsDisplayBlock) => {
     console.log("it's 2 columns init");
     const columnA = columnsDisplayBlock[0],
@@ -95,15 +101,8 @@ let compareMembership = {
       columnB = columnsDisplayBlock[1],
       columnBbasic = columnB.querySelectorAll("option")[1];
 
-    columnAplus.setAttribute("disabled", true);
-    columnAplus.setAttribute("hidden", true);
-    columnAplus.setAttribute("aria-hidden", true);
-    columnAplus.setAttribute("class", "d-none");
-
-    columnBbasic.setAttribute("disabled", true);
-    columnBbasic.setAttribute("hidden", true);
-    columnBbasic.setAttribute("aria-hidden", true);
-    columnBbasic.setAttribute("class", "d-none");
+    compareMembership.setOptionAttr(columnAplus);
+    compareMembership.setOptionAttr(columnBbasic);
   },
   threeColInit: (columnsDisplayBlock) => {
     console.log("it's 3 columns init");
@@ -117,35 +116,18 @@ let compareMembership = {
       columnCBasic = columnC.querySelectorAll("option")[1],
       columnCplus = columnC.querySelectorAll("option")[2]
 
-    columnAplus.setAttribute("disabled", true);
-    columnAplus.setAttribute("hidden", true);
-    columnAplus.setAttribute("aria-hidden", true);
-    columnAplus.setAttribute("class", "d-none");
-
-    columnApremier.setAttribute("disabled", true);
-    columnApremier.setAttribute("hidden", true);
-    columnApremier.setAttribute("aria-hidden", true);
-    columnApremier.setAttribute("class", "d-none");
-
-    columnBbasic.setAttribute("disabled", true);
-    columnBbasic.setAttribute("hidden", true);
-    columnBbasic.setAttribute("aria-hidden", true);
-    columnBbasic.setAttribute("class", "d-none");
-
-    columnBpremier.setAttribute("disabled", true);
-    columnBpremier.setAttribute("hidden", true);
-    columnBpremier.setAttribute("aria-hidden", true);
-    columnBpremier.setAttribute("class", "d-none");
-
-    columnCBasic.setAttribute("disabled", true);
-    columnCBasic.setAttribute("hidden", true);
-    columnCBasic.setAttribute("aria-hidden", true);
-    columnCBasic.setAttribute("class", "d-none");
-
-    columnCplus.setAttribute("disabled", true);
-    columnCplus.setAttribute("hidden", true);
-    columnCplus.setAttribute("aria-hidden", true);
-    columnCplus.setAttribute("class", "d-none");
+    compareMembership.setOptionAttr(columnAplus);
+    compareMembership.setOptionAttr(columnApremier);
+    compareMembership.setOptionAttr(columnBbasic);
+    compareMembership.setOptionAttr(columnBpremier);
+    compareMembership.setOptionAttr(columnCBasic);
+    compareMembership.setOptionAttr(columnCplus);
+  },
+  twoCols: () => {
+    console.log("it's 2 columns init");
+  },
+  threeCols: () => {
+    console.log("it's 3 columns init");
   },
 
   // ----- Is the page two or three columns -----
