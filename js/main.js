@@ -88,7 +88,8 @@ let compareMembership = {
 
     // console.log(compareMembership.config);
   },
-  setOptionAttr: (targetColumnAndOption) => {
+
+  setOptionAttrHide: (targetColumnAndOption) => {
     targetColumnAndOption.setAttribute("disabled", true);
     targetColumnAndOption.setAttribute("hidden", true);
     targetColumnAndOption.setAttribute("aria-hidden", true);
@@ -101,8 +102,8 @@ let compareMembership = {
       columnB = columnsDisplayBlock[1],
       columnBbasic = columnB.querySelectorAll("option")[1];
 
-    compareMembership.setOptionAttr(columnAplus);
-    compareMembership.setOptionAttr(columnBbasic);
+    compareMembership.setOptionAttrHide(columnAplus);
+    compareMembership.setOptionAttrHide(columnBbasic);
   },
   threeColInit: (columnsDisplayBlock) => {
     console.log("it's 3 columns init");
@@ -116,12 +117,12 @@ let compareMembership = {
       columnCBasic = columnC.querySelectorAll("option")[1],
       columnCplus = columnC.querySelectorAll("option")[2]
 
-    compareMembership.setOptionAttr(columnAplus);
-    compareMembership.setOptionAttr(columnApremier);
-    compareMembership.setOptionAttr(columnBbasic);
-    compareMembership.setOptionAttr(columnBpremier);
-    compareMembership.setOptionAttr(columnCBasic);
-    compareMembership.setOptionAttr(columnCplus);
+    compareMembership.setOptionAttrHide(columnAplus);
+    compareMembership.setOptionAttrHide(columnApremier);
+    compareMembership.setOptionAttrHide(columnBbasic);
+    compareMembership.setOptionAttrHide(columnBpremier);
+    compareMembership.setOptionAttrHide(columnCBasic);
+    compareMembership.setOptionAttrHide(columnCplus);
   },
   twoCols: () => {
     console.log("it's 2 columns init");
@@ -149,26 +150,20 @@ let compareMembership = {
   // ----- Set the card data via .innerHTML -----
   setCardDataHtml: (collectDataList, cardDataType) => {
     collectDataList.forEach((collectDataListItem, index) => {
-      const element = collectDataList[index];
-      if (cardDataType === "cardName") {
-        element.innerHTML += cardData[index].cardName;
-      }
-      if (cardDataType === "cardValue") {
-        element.innerHTML += cardData[index].cardValue;
-      }
+      const dataItem = collectDataList[index];
+      if (cardDataType === "cardName") { dataItem.innerHTML += cardData[index].cardName; }
+      if (cardDataType === "cardValue") { dataItem.innerHTML += cardData[index].cardValue; }
     });
   },
 
   // ----- Set the card data via attribute change -----
   setCardDataAttr: (collectDataList, cardAttrType) => {
     collectDataList.forEach((collectDataListItem, index) => {
-      const element = collectDataList[index];
-      if (cardAttrType === "src") {
-        element.src = cardData[index].cardImg;
-      }
+      const dataItem = collectDataList[index];
+      if (cardAttrType === "src") { dataItem.src = cardData[index].cardImg; }
       if (cardAttrType === "href") {
-        element.href = cardData[index].cardLink.url;
-        element.innerHTML = cardData[index].cardLink.label;
+        dataItem.href = cardData[index].cardLink.url;
+        dataItem.innerHTML = cardData[index].cardLink.label;
       }
     });
   },
