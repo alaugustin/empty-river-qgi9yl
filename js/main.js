@@ -175,29 +175,29 @@ let compareMembership = {
       const colCselect = columnsDisplayBlock[2].getElementsByTagName("select");
       const colCselectOptions = colCselect[0].options;
 
-      console.log(colAselect);
-      console.log(colAselectOptions[0]);
-      console.log(colAselectOptions[1]);
-      console.log(colAselectOptions[2]);
-      console.log(colAselectOptions[3]);
+      // console.log(colAselect);
+      // console.log(colAselectOptions[0]);
+      // console.log(colAselectOptions[1]);
+      // console.log(colAselectOptions[2]);
+      // console.log(colAselectOptions[3]);
 
-      console.log(colBselect);
-      console.log(colBselectOptions[0]);
-      console.log(colBselectOptions[1]);
-      console.log(colBselectOptions[2]);
-      console.log(colBselectOptions[3]);
+      // console.log(colBselect);
+      // console.log(colBselectOptions[0]);
+      // console.log(colBselectOptions[1]);
+      // console.log(colBselectOptions[2]);
+      // console.log(colBselectOptions[3]);
 
-      console.log(colCselect);
-      console.log(colCselectOptions[0]);
-      console.log(colCselectOptions[1]);
-      console.log(colCselectOptions[2]);
-      console.log(colCselectOptions[3]);
+      // console.log(colCselect);
+      // console.log(colCselectOptions[0]);
+      // console.log(colCselectOptions[1]);
+      // console.log(colCselectOptions[2]);
+      // console.log(colCselectOptions[3]);
     }
     // ----- Two columns -----
     if (columnsDisplayNone.length == 2) {
       // compareMembership.twoColInit(columnsDisplayBlock);
       console.log("it's 2 columns");
-      console.log(columnsDisplayBlock);
+      // console.log(columnsDisplayBlock);
     }
   },
 
@@ -224,14 +224,14 @@ let compareMembership = {
 
   // ----- Set accordion row parity -----
   rowParity: (rowParity, transposedArrayItem) => {
-    return (
-      `<div class="row ${rowParity}">
-      <div class="aLaCarte d-none d-lg-block col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[0]}</div></div>
-      <div class="basic col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[1]}</div></div>
-      <div class="plus col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[2]}</div></div>
-      <div class="premier d-none d-md-block col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[3]}</div></div>
-    </div>`
-    );
+    return (`
+      <div class="row ${rowParity}">
+        <div class="colA d-none d-lg-block col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[0]}</div></div>
+        <div class="colB col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[1]}</div></div>
+        <div class="colC col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[2]}</div></div>
+        <div class="colD d-none d-md-block col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[3]}</div></div>
+      </div>
+    `);
   },
 
   // ----- Transpose card data -----
@@ -252,49 +252,57 @@ let compareMembership = {
     return accordionRow;
   },
 
+  populateSelectedColumn: (selectedCardData, selectBoxValue, selectOptionIndex) => {
+    console.log(`${selectBoxValue} selected`);
+    console.log(`index of selected is ${selectOptionIndex}`);
+    console.log(selectedCardData);
+    console.log(event);
+  },
+
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
   eventHandlers: () => {
     const compareSelectBoxList = compareMembership.config.compareSelectBoxList,
       compareSelectBoxListArray = [].slice.call(compareSelectBoxList);
 
-      window.addEventListener('resize', (event) => {
-        compareMembership.twoOrThreeColumnsVisible(event);
-      }, true);
+      // window.addEventListener('resize', (event) => {
+      //   compareMembership.twoOrThreeColumnsVisible(event);
+      // }, true);
 
       // ----- Handle dropdown changes -----
-    //   compareSelectBoxListArray.map(
-    //   selectBox => {
-    //       selectBox.addEventListener('change', (event) => {
-    //         const selectBoxValue = selectBox.value,
-    //           selectOptionIndex = selectBox.selectedIndex;
+      compareSelectBoxListArray.map(
+      selectBox => {
+          selectBox.addEventListener('change', (event) => {
+            const selectBoxValue = selectBox.value,
+              selectOptionIndex = selectBox.selectedIndex,
+              selectedCardData = cardData[selectOptionIndex];
 
-    //       switch (selectBoxValue) {
-    //         case "aLaCarte":
-    //           // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
-    //           console.log("aLaCarte selected");
+          switch (selectBoxValue) {
+            case "aLaCarte":
+              // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+              compareMembership.populateSelectedColumn(selectedCardData, selectBoxValue, selectOptionIndex);
 
-    //           break;
-    //         case "basic":
-    //           // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
-    //           console.log("basic selected");
+              break;
+            case "basic":
+              // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+              compareMembership.populateSelectedColumn(selectedCardData, selectBoxValue, selectOptionIndex);
 
-    //           break;
-    //         case "plus":
-    //           // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
-    //           console.log("plus selected");
+              break;
+            case "plus":
+              // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+              compareMembership.populateSelectedColumn(selectedCardData, selectBoxValue, selectOptionIndex);
 
-    //           break;
-    //         case "premier":
-    //           // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
-    //           console.log("premier selected");
+              break;
+            case "premier":
+              // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+              compareMembership.populateSelectedColumn(selectedCardData, selectBoxValue, selectOptionIndex);
 
-    //           break;
-    //         default:
-    //           break;
-    //       }
-    //     }, true);
-    //   }
-    // );
+              break;
+            default:
+              break;
+          }
+        }, true);
+      }
+    );
   },
 };
 
