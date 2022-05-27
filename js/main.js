@@ -124,6 +124,32 @@ let compareMembership = {
     compareMembership.setOptionAttrHide(columnCplus);
   },
 
+  handleDropdownChange: (selectBoxValue, selectedOptionIndex, event) => {
+    const selectBoxCollection = compareMembership.config.compareSelectBoxList,
+    columnCollectionArray = [].slice.call(selectBoxCollection)
+
+    console.log(`
+    the select box value is ${selectBoxValue}
+    the select box value index is ${selectedOptionIndex}
+    the targeted select box is ${event.target}
+    the targeted select box id is ${event.target.id}
+    `);
+
+    columnCollectionArray.map(
+      selectBox => {
+        if (selectBox.id == event.target.id) {
+          selectBox.style.backgroundColor = "red";
+
+          selectBox.options[selectedOptionIndex].setAttribute("class", "d-md-block"); // will need a condition for mobile
+        } else {
+          selectBox.style.backgroundColor = "blue";
+
+          selectBox.options[selectedOptionIndex].setAttribute("class", "d-md-none"); // will need a condition for mobile
+        }
+      }
+    )
+  },
+
   twoCols: () => {
     console.log("it's 2 columns");
   },
@@ -210,11 +236,33 @@ let compareMembership = {
         compareMembership.twoOrThreeColumnsVisible(event);
       }, true);
 
+      // ----- Handle dropdown changes -----
       compareSelectBoxListArray.map(
       selectBox => {
-        // console.log(x);
-        selectBox.addEventListener('change', () => {
-          console.log(selectBox.value);
+          selectBox.addEventListener('change', (event) => {
+            const selectBoxValue = selectBox.value,
+              selectOptionIndex = selectBox.selectedIndex;
+
+          switch (selectBoxValue) {
+            case "aLaCarte":
+              compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+
+              break;
+            case "basic":
+              compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+
+              break;
+            case "plus":
+              compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+
+              break;
+            case "premier":
+              compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+
+              break;
+            default:
+              break;
+          }
         }, true);
       }
     );
