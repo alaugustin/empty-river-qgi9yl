@@ -95,10 +95,11 @@ let compareMembership = {
 
   twoColInit: (columnsDisplayBlock) => {
     console.log("it's twoColInit");
-    const columnA = columnsDisplayBlock[0],
-      columnAplus = columnA.querySelectorAll("option")[2],
-      columnB = columnsDisplayBlock[1],
-      columnBbasic = columnB.querySelectorAll("option")[1];
+    console.log(columnsDisplayBlock);
+    // const columnA = columnsDisplayBlock[0],
+    //   columnAplus = columnA.querySelectorAll("option")[2],
+    //   columnB = columnsDisplayBlock[1],
+    //   columnBbasic = columnB.querySelectorAll("option")[1];
 
     // compareMembership.setOptionAttrHide(columnAplus);
     // compareMembership.setOptionAttrHide(columnBbasic);
@@ -106,15 +107,16 @@ let compareMembership = {
 
   threeColInit: (columnsDisplayBlock) => {
     console.log("it's threeColInit");
-    const columnA = columnsDisplayBlock[0],
-      columnAplus = columnA.querySelectorAll("option")[2],
-      columnApremier = columnA.querySelectorAll("option")[3],
-      columnB = columnsDisplayBlock[1],
-      columnBbasic = columnB.querySelectorAll("option")[1],
-      columnBpremier = columnB.querySelectorAll("option")[3],
-      columnC = columnsDisplayBlock[2],
-      columnCBasic = columnC.querySelectorAll("option")[1],
-      columnCplus = columnC.querySelectorAll("option")[2]
+    console.log(columnsDisplayBlock);
+    // const columnA = columnsDisplayBlock[0],
+    //   columnAplus = columnA.querySelectorAll("option")[2],
+    //   columnApremier = columnA.querySelectorAll("option")[3],
+    //   columnB = columnsDisplayBlock[1],
+    //   columnBbasic = columnB.querySelectorAll("option")[1],
+    //   columnBpremier = columnB.querySelectorAll("option")[3],
+    //   columnC = columnsDisplayBlock[2],
+    //   columnCBasic = columnC.querySelectorAll("option")[1],
+    //   columnCplus = columnC.querySelectorAll("option")[2]
 
     // compareMembership.setOptionAttrHide(columnAplus);
     // compareMembership.setOptionAttrHide(columnApremier);
@@ -124,30 +126,30 @@ let compareMembership = {
     // compareMembership.setOptionAttrHide(columnCplus);
   },
 
-  handleDropdownChange: (selectBoxValue, selectedOptionIndex, event) => {
-    const selectBoxCollection = compareMembership.config.compareSelectBoxList,
-    columnCollectionArray = [].slice.call(selectBoxCollection)
+  // handleDropdownChange: (selectBoxValue, selectedOptionIndex, event) => {
+  //   const selectBoxCollection = compareMembership.config.compareSelectBoxList,
+  //   columnCollectionArray = [].slice.call(selectBoxCollection)
 
-    console.log(`
-    the select box value is ${selectBoxValue}
-    the select box value index is ${selectedOptionIndex}
-    `);
-    console.log(event);
-    console.log(event.target);
-    console.log(cardData[selectedOptionIndex]); // selected card data
+  //   console.log(`
+  //   the select box value is ${selectBoxValue}
+  //   the select box value index is ${selectedOptionIndex}
+  //   `);
+  //   console.log(event);
+  //   console.log(event.target);
+  //   console.log(cardData[selectedOptionIndex]); // selected card data
 
-    // columnCollectionArray.map(
-    //   selectBox => {
-    //     if (selectBox.id == event.target.id) {
-    //       selectBox.style.backgroundColor = "red";
-    //       console.log(selectBox.options[selectedOptionIndex]);
-    //     } else {
-    //       selectBox.style.backgroundColor = "blue";
-    //       console.log(selectBox.options[selectedOptionIndex]);
-    //     }
-    //   }
-    // )
-  },
+  //   columnCollectionArray.map(
+  //     selectBox => {
+  //       if (selectBox.id == event.target.id) {
+  //         selectBox.style.backgroundColor = "red";
+  //         console.log(selectBox.options[selectedOptionIndex]);
+  //       } else {
+  //         selectBox.style.backgroundColor = "blue";
+  //         console.log(selectBox.options[selectedOptionIndex]);
+  //       }
+  //     }
+  //   )
+  // },
 
   twoCols: () => {
     console.log("it's 2 columns");
@@ -164,11 +166,38 @@ let compareMembership = {
       columnsDisplayBlock = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "block" });
     // ----- Three columns -----
     if (columnsDisplayNone.length == 1) {
-      compareMembership.threeColInit(columnsDisplayBlock);
+      // compareMembership.threeColInit(columnsDisplayBlock);
+      console.log("it's 3 columns");
+      const colAselect = columnsDisplayBlock[0].getElementsByTagName("select");
+      const colAselectOptions = colAselect[0].options;
+      const colBselect = columnsDisplayBlock[1].getElementsByTagName("select");
+      const colBselectOptions = colBselect[0].options;
+      const colCselect = columnsDisplayBlock[2].getElementsByTagName("select");
+      const colCselectOptions = colCselect[0].options;
+
+      console.log(colAselect);
+      console.log(colAselectOptions[0]);
+      console.log(colAselectOptions[1]);
+      console.log(colAselectOptions[2]);
+      console.log(colAselectOptions[3]);
+
+      console.log(colBselect);
+      console.log(colBselectOptions[0]);
+      console.log(colBselectOptions[1]);
+      console.log(colBselectOptions[2]);
+      console.log(colBselectOptions[3]);
+
+      console.log(colCselect);
+      console.log(colCselectOptions[0]);
+      console.log(colCselectOptions[1]);
+      console.log(colCselectOptions[2]);
+      console.log(colCselectOptions[3]);
     }
     // ----- Two columns -----
     if (columnsDisplayNone.length == 2) {
-      compareMembership.twoColInit(columnsDisplayBlock);
+      // compareMembership.twoColInit(columnsDisplayBlock);
+      console.log("it's 2 columns");
+      console.log(columnsDisplayBlock);
     }
   },
 
@@ -224,9 +253,6 @@ let compareMembership = {
   },
 
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
-  // changDropdownselection: () => {
-  //   console.log('changDropdownselection() executed');
-  // },
   eventHandlers: () => {
     const compareSelectBoxList = compareMembership.config.compareSelectBoxList,
       compareSelectBoxListArray = [].slice.call(compareSelectBoxList);
@@ -236,35 +262,39 @@ let compareMembership = {
       }, true);
 
       // ----- Handle dropdown changes -----
-      compareSelectBoxListArray.map(
-      selectBox => {
-          selectBox.addEventListener('change', (event) => {
-            const selectBoxValue = selectBox.value,
-              selectOptionIndex = selectBox.selectedIndex;
+    //   compareSelectBoxListArray.map(
+    //   selectBox => {
+    //       selectBox.addEventListener('change', (event) => {
+    //         const selectBoxValue = selectBox.value,
+    //           selectOptionIndex = selectBox.selectedIndex;
 
-          switch (selectBoxValue) {
-            case "aLaCarte":
-              compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+    //       switch (selectBoxValue) {
+    //         case "aLaCarte":
+    //           // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+    //           console.log("aLaCarte selected");
 
-              break;
-            case "basic":
-              compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+    //           break;
+    //         case "basic":
+    //           // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+    //           console.log("basic selected");
 
-              break;
-            case "plus":
-              compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+    //           break;
+    //         case "plus":
+    //           // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+    //           console.log("plus selected");
 
-              break;
-            case "premier":
-              compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+    //           break;
+    //         case "premier":
+    //           // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
+    //           console.log("premier selected");
 
-              break;
-            default:
-              break;
-          }
-        }, true);
-      }
-    );
+    //           break;
+    //         default:
+    //           break;
+    //       }
+    //     }, true);
+    //   }
+    // );
   },
 };
 
@@ -273,13 +303,6 @@ window.addEventListener("load", () => {
   compareMembership.init();
 });
 
-
-
-
-
-
-
-// ----- Media query -----
 // document.addEventListener("DOMContentLoaded", function (e) {
 //   let mqls = [
 //     window.matchMedia("(max-width: 767px)"),
@@ -289,7 +312,6 @@ window.addEventListener("load", () => {
 
 //   const mqh = () => {
 //     if (mqls[0].matches) {
-//
 //       console.log("this is mobile");
 //       console.log("CALLBACK (max-width: 767px)");
 //     } else if (mqls[1].matches) {
