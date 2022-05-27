@@ -100,8 +100,8 @@ let compareMembership = {
       columnB = columnsDisplayBlock[1],
       columnBbasic = columnB.querySelectorAll("option")[1];
 
-    compareMembership.setOptionAttrHide(columnAplus);
-    compareMembership.setOptionAttrHide(columnBbasic);
+    // compareMembership.setOptionAttrHide(columnAplus);
+    // compareMembership.setOptionAttrHide(columnBbasic);
   },
 
   threeColInit: (columnsDisplayBlock) => {
@@ -116,12 +116,12 @@ let compareMembership = {
       columnCBasic = columnC.querySelectorAll("option")[1],
       columnCplus = columnC.querySelectorAll("option")[2]
 
-    compareMembership.setOptionAttrHide(columnAplus);
-    compareMembership.setOptionAttrHide(columnApremier);
-    compareMembership.setOptionAttrHide(columnBbasic);
-    compareMembership.setOptionAttrHide(columnBpremier);
-    compareMembership.setOptionAttrHide(columnCBasic);
-    compareMembership.setOptionAttrHide(columnCplus);
+    // compareMembership.setOptionAttrHide(columnAplus);
+    // compareMembership.setOptionAttrHide(columnApremier);
+    // compareMembership.setOptionAttrHide(columnBbasic);
+    // compareMembership.setOptionAttrHide(columnBpremier);
+    // compareMembership.setOptionAttrHide(columnCBasic);
+    // compareMembership.setOptionAttrHide(columnCplus);
   },
 
   handleDropdownChange: (selectBoxValue, selectedOptionIndex, event) => {
@@ -131,23 +131,22 @@ let compareMembership = {
     console.log(`
     the select box value is ${selectBoxValue}
     the select box value index is ${selectedOptionIndex}
-    the targeted select box is ${event.target}
-    the targeted select box id is ${event.target.id}
     `);
+    console.log(event);
+    console.log(event.target);
+    console.log(cardData[selectedOptionIndex]); // selected card data
 
-    columnCollectionArray.map(
-      selectBox => {
-        if (selectBox.id == event.target.id) {
-          selectBox.style.backgroundColor = "red";
-
-          selectBox.options[selectedOptionIndex].setAttribute("class", "d-md-block"); // will need a condition for mobile
-        } else {
-          selectBox.style.backgroundColor = "blue";
-
-          selectBox.options[selectedOptionIndex].setAttribute("class", "d-md-none"); // will need a condition for mobile
-        }
-      }
-    )
+    // columnCollectionArray.map(
+    //   selectBox => {
+    //     if (selectBox.id == event.target.id) {
+    //       selectBox.style.backgroundColor = "red";
+    //       console.log(selectBox.options[selectedOptionIndex]);
+    //     } else {
+    //       selectBox.style.backgroundColor = "blue";
+    //       console.log(selectBox.options[selectedOptionIndex]);
+    //     }
+    //   }
+    // )
   },
 
   twoCols: () => {
