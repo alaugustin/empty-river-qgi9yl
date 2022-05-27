@@ -197,10 +197,10 @@ let compareMembership = {
   rowParity: (rowParity, transposedArrayItem) => {
     return (
       `<div class="row ${rowParity}">
-      <div class="aLaCarte d-none d-lg-block col-6 col-md-4 col-lg-3 rich-text">${transposedArrayItem[0]}</div>
-      <div class="basic col-6 col-md-4 col-lg-3 rich-text">${transposedArrayItem[1]}</div>
-      <div class="plus col-6 col-md-4 col-lg-3 rich-text">${transposedArrayItem[2]}</div>
-      <div class="premier d-none d-md-block col-6 col-md-4 col-lg-3 rich-text">${transposedArrayItem[3]}</div>
+      <div class="aLaCarte d-none d-lg-block col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[0]}</div></div>
+      <div class="basic col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[1]}</div></div>
+      <div class="plus col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[2]}</div></div>
+      <div class="premier d-none d-md-block col-6 col-md-4 col-lg-3 rich-text"><div class="px-5 py-3">${transposedArrayItem[3]}</div></div>
     </div>`
     );
   },
