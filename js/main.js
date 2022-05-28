@@ -43,6 +43,7 @@ let compareMembership = {
       premierCardData: cardData[3],
       topRowColumnsList: document.querySelectorAll(".compare-membership__top .row > div"),
       compareSelectBoxList: document.querySelectorAll(".compare-membership__top select"),
+      bestValueHolderList: document.querySelectorAll(".valueContainer"),
       membershipCardHeadingList: document.querySelectorAll(".membership-card__heading"),
       membershipCardPriceList: document.querySelectorAll(".membership-card__price span"),
       membershipCardImgList: document.querySelectorAll(".membership-card__card-image"),
@@ -81,6 +82,7 @@ let compareMembership = {
     compareMembership.setCardDataHtml(compareMembership.config.membershipCardPriceList, "cardValue");
     compareMembership.setCardDataAttr(compareMembership.config.membershipCardImgList, "src");
     compareMembership.setCardDataAttr(compareMembership.config.membershipCardCtaList, "href");
+    compareMembership.initCardBestValue();
     compareMembership.config.roadsideAccordionHolder.innerHTML = compareMembership.transposeCardData(roadsideData);
     compareMembership.config.savingsAccordionHolder.innerHTML = compareMembership.transposeCardData(savingsData);
     compareMembership.config.benefitsAccordionHolder.innerHTML = compareMembership.transposeCardData(benefitsData);
@@ -178,6 +180,24 @@ let compareMembership = {
     });
   },
 
+  initCardBestValue: () => {
+    const bestValHolderList = compareMembership.config.bestValueHolderList,
+      bestValPresent = [aLaCardData.bestValue, basicCardData.bestValue, plusCardData.bestValue, premierCardData.bestValue];
+    console.log(bestValPresent);
+    console.log(bestValHolderList);
+    bestValPresent.map(
+      (x, index) => {
+        if (x) {
+          console.log("true");
+          console.log(bestValHolderList[index]);
+          bestValHolderList[index].innerHTML = `<div class="rounded text-center p-1 bg-primary text-white">Best Value</div>`
+        } else {
+          console.log("false");
+          console.log(bestValHolderList[index]);
+        }
+      }
+    )
+  },
   // ----- Set accordion row parity -----
   rowParity: (rowParity, transposedArrayItem) => {
     return (`

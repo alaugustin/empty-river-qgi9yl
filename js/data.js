@@ -9,6 +9,7 @@ let cardData = [
       label: "Call 1-877-475-5061",
     },
     selectValue: "aLaCarte",
+    bestValue: false,
     roadside: ["—", "—", "—", "—", "—", "—", "—"],
     savings: [
       "Member pricing on Canadian passport photos",
@@ -33,6 +34,7 @@ let cardData = [
       label: "Join Now",
     },
     selectValue: "basic",
+    bestValue: false,
     roadside: [
       "Four service calls",
       "Towing distance of 10 km per call<sup>1</sup>",
@@ -65,6 +67,7 @@ let cardData = [
       label: "Join Now",
     },
     selectValue: "plus",
+    bestValue: true,
     roadside: [
       "Four service calls",
       "Towing distance of 200 km per call<sup>1</sup>",
@@ -97,6 +100,7 @@ let cardData = [
       label: "Join Now",
     },
     selectValue: "premier",
+    bestValue: false,
     roadside: [
       "Five service calls",
       "Towing distance of 320 km on one call and 200 km on four calls<sup>1</sup>",
