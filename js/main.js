@@ -93,38 +93,15 @@ let compareMembership = {
     targetColumnAndOption.setAttribute("aria-hidden", true);
   },
 
-  twoColInit: (columnsDisplayBlock) => {
-    console.log("it's twoColInit");
-    console.log(columnsDisplayBlock);
-    // const columnA = columnsDisplayBlock[0],
-    //   columnAplus = columnA.querySelectorAll("option")[2],
-    //   columnB = columnsDisplayBlock[1],
-    //   columnBbasic = columnB.querySelectorAll("option")[1];
+  // twoColInit: (columnsDisplayBlock) => {
+  //   console.log("it's twoColInit");
+  //   console.log(columnsDisplayBlock);
+  // },
 
-    // compareMembership.setOptionAttrHide(columnAplus);
-    // compareMembership.setOptionAttrHide(columnBbasic);
-  },
-
-  threeColInit: (columnsDisplayBlock) => {
-    console.log("it's threeColInit");
-    console.log(columnsDisplayBlock);
-    // const columnA = columnsDisplayBlock[0],
-    //   columnAplus = columnA.querySelectorAll("option")[2],
-    //   columnApremier = columnA.querySelectorAll("option")[3],
-    //   columnB = columnsDisplayBlock[1],
-    //   columnBbasic = columnB.querySelectorAll("option")[1],
-    //   columnBpremier = columnB.querySelectorAll("option")[3],
-    //   columnC = columnsDisplayBlock[2],
-    //   columnCBasic = columnC.querySelectorAll("option")[1],
-    //   columnCplus = columnC.querySelectorAll("option")[2]
-
-    // compareMembership.setOptionAttrHide(columnAplus);
-    // compareMembership.setOptionAttrHide(columnApremier);
-    // compareMembership.setOptionAttrHide(columnBbasic);
-    // compareMembership.setOptionAttrHide(columnBpremier);
-    // compareMembership.setOptionAttrHide(columnCBasic);
-    // compareMembership.setOptionAttrHide(columnCplus);
-  },
+  // threeColInit: (columnsDisplayBlock) => {
+  //   console.log("it's threeColInit");
+  //   console.log(columnsDisplayBlock);
+  // },
 
   // handleDropdownChange: (selectBoxValue, selectedOptionIndex, event) => {
   //   const selectBoxCollection = compareMembership.config.compareSelectBoxList,
@@ -166,38 +143,17 @@ let compareMembership = {
       columnsDisplayBlock = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "block" });
     // ----- Three columns -----
     if (columnsDisplayNone.length == 1) {
-      // compareMembership.threeColInit(columnsDisplayBlock);
       console.log("it's 3 columns");
-      const colAselect = columnsDisplayBlock[0].getElementsByTagName("select");
-      const colAselectOptions = colAselect[0].options;
-      const colBselect = columnsDisplayBlock[1].getElementsByTagName("select");
-      const colBselectOptions = colBselect[0].options;
-      const colCselect = columnsDisplayBlock[2].getElementsByTagName("select");
-      const colCselectOptions = colCselect[0].options;
-
-      // console.log(colAselect);
-      // console.log(colAselectOptions[0]);
-      // console.log(colAselectOptions[1]);
-      // console.log(colAselectOptions[2]);
-      // console.log(colAselectOptions[3]);
-
-      // console.log(colBselect);
-      // console.log(colBselectOptions[0]);
-      // console.log(colBselectOptions[1]);
-      // console.log(colBselectOptions[2]);
-      // console.log(colBselectOptions[3]);
-
-      // console.log(colCselect);
-      // console.log(colCselectOptions[0]);
-      // console.log(colCselectOptions[1]);
-      // console.log(colCselectOptions[2]);
-      // console.log(colCselectOptions[3]);
+      // const colAselect = columnsDisplayBlock[0].getElementsByTagName("select");
+      // const colAselectOptions = colAselect[0].options;
+      // const colBselect = columnsDisplayBlock[1].getElementsByTagName("select");
+      // const colBselectOptions = colBselect[0].options;
+      // const colCselect = columnsDisplayBlock[2].getElementsByTagName("select");
+      // const colCselectOptions = colCselect[0].options;
     }
     // ----- Two columns -----
     if (columnsDisplayNone.length == 2) {
-      // compareMembership.twoColInit(columnsDisplayBlock);
       console.log("it's 2 columns");
-      // console.log(columnsDisplayBlock);
     }
   },
 
@@ -252,11 +208,65 @@ let compareMembership = {
     return accordionRow;
   },
 
-  populateSelectedColumn: (selectedCardData, selectBoxValue, selectOptionIndex) => {
-    console.log(`${selectBoxValue} selected`);
-    console.log(`index of selected is ${selectOptionIndex}`);
+  // ----- Populate selected column with data
+  populateSelectedColumnData: (selectedColumn, selectedIndex, selectedCardData) => {
+    const topColumnContainer = document.querySelectorAll(".compare-membership__top .row > div"),
+      selectedControlRowCol = topColumnContainer[selectedIndex],
+      roadsideAccordionHolder = compareMembership.config.roadsideAccordionHolder,
+      savingsAccordionHolder = compareMembership.config.savingsAccordionHolder,
+      benefitsAccordionHolder = compareMembership.config.benefitsAccordionHolder,
+      selectedControlRowColPrice = selectedControlRowCol.querySelectorAll(".membership-card__price span"),
+      selectedControlRowColImage = selectedControlRowCol.querySelectorAll(".membership-card__card-image"),
+      selectedControlRowColCta = selectedControlRowCol.querySelectorAll(".compare-cards__cta-container a"),
+      selectedColroadside = roadsideAccordionHolder.querySelectorAll(selectedColumn),
+      selectedColsavings = savingsAccordionHolder.querySelectorAll(selectedColumn),
+      selectedColbenefits = benefitsAccordionHolder.querySelectorAll(selectedColumn);
+
+    // update selected top section column items
+    selectedControlRowColPrice[0].innerHTML = `$${selectedCardData.cardValue}`;
+    selectedControlRowColImage[0].src = selectedCardData.cardImg; // change the alt
+    selectedControlRowColCta[0].href = selectedCardData.cardLink.url
+    selectedControlRowColCta[0].innerHTML = selectedCardData.cardLink.label
+
+    // selected accordion columns
+    console.log(selectedColroadside);
+    console.log(selectedColsavings);
+    console.log(selectedColbenefits);
     console.log(selectedCardData);
-    console.log(event);
+
+  },
+
+  getSelectedColumn: (selectedBox, selectedCardData, selectBoxValue, selectOptionIndex) => {
+    // console.log(selectedBox.id);
+    // console.log(`${selectBoxValue} selected`);
+    // console.log(`index of selected is ${selectOptionIndex}`);
+    // console.log(selectedCardData);
+    // console.log(event);
+
+    const columnB = ".row > div.colB",
+      columnC = ".row > div.colC",
+      columnD = ".row > div.colD";
+
+    switch (selectedBox.id) {
+      case "selectBoxB":
+        selectedIndex = 1;
+        compareMembership.populateSelectedColumnData(columnB, selectedIndex, selectedCardData);
+
+        break;
+      case "selectBoxC":
+        selectedIndex = 2;
+        compareMembership.populateSelectedColumnData(columnC, selectedIndex, selectedCardData);
+
+        break;
+      case "selectBoxD":
+        selectedIndex = 3;
+        compareMembership.populateSelectedColumnData(columnD, selectedIndex, selectedCardData);
+
+        break;
+
+      default:
+        break;
+    }
   },
 
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
@@ -272,29 +282,26 @@ let compareMembership = {
       compareSelectBoxListArray.map(
       selectBox => {
           selectBox.addEventListener('change', (event) => {
-            const selectBoxValue = selectBox.value,
+            const selectedBox = selectBox,
+              selectBoxValue = selectBox.value,
               selectOptionIndex = selectBox.selectedIndex,
               selectedCardData = cardData[selectOptionIndex];
 
           switch (selectBoxValue) {
             case "aLaCarte":
-              // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
-              compareMembership.populateSelectedColumn(selectedCardData, selectBoxValue, selectOptionIndex);
+              compareMembership.getSelectedColumn(selectedBox, selectedCardData, selectBoxValue, selectOptionIndex);
 
               break;
             case "basic":
-              // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
-              compareMembership.populateSelectedColumn(selectedCardData, selectBoxValue, selectOptionIndex);
+              compareMembership.getSelectedColumn(selectedBox, selectedCardData, selectBoxValue, selectOptionIndex);
 
               break;
             case "plus":
-              // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
-              compareMembership.populateSelectedColumn(selectedCardData, selectBoxValue, selectOptionIndex);
+              compareMembership.getSelectedColumn(selectedBox, selectedCardData, selectBoxValue, selectOptionIndex);
 
               break;
             case "premier":
-              // compareMembership.handleDropdownChange(selectBoxValue, selectOptionIndex, event);
-              compareMembership.populateSelectedColumn(selectedCardData, selectBoxValue, selectOptionIndex);
+              compareMembership.getSelectedColumn(selectedBox, selectedCardData, selectBoxValue, selectOptionIndex);
 
               break;
             default:
