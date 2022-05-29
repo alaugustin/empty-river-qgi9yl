@@ -53,7 +53,6 @@ let compareMembership = {
       savingsAccordionHolder: document.querySelector(".savings.accordion__content-container .accordion__complex-row"),
       benefitsAccordionHolder: document.querySelector(".benefits.accordion__content-container .accordion__complex-row"),
       bestValueHtml: `<div class="rounded text-center p-1 bg-primary text-white">Best Value</div>`,
-
       roadsideData: [
         aLaCardData.roadside,
         basicCardData.roadside,
@@ -80,24 +79,26 @@ let compareMembership = {
   },
 
   onDomReady: () => {
+    const compMemConfig = compareMembership.config;
+
     compareMembership.twoOrThreeColumnsVisible();
-    compareMembership.setCardDataHtml(compareMembership.config.membershipCardHeadingList, "cardName");
-    compareMembership.setCardDataHtml(compareMembership.config.membershipCardPriceList, "cardValue");
-    compareMembership.setCardDataAttr(compareMembership.config.membershipCardImgList, "src");
-    compareMembership.setCardDataAttr(compareMembership.config.membershipCardCtaList, "href");
+    compareMembership.setCardDataHtml(compMemConfig.membershipCardHeadingList, "cardName");
+    compareMembership.setCardDataHtml(compMemConfig.membershipCardPriceList, "cardValue");
+    compareMembership.setCardDataAttr(compMemConfig.membershipCardImgList, "src");
+    compareMembership.setCardDataAttr(compMemConfig.membershipCardCtaList, "href");
     compareMembership.initCardBestValue();
     compareMembership.initCardRvOption();
-    compareMembership.config.roadsideAccordionHolder.innerHTML = compareMembership.transposeCardData(roadsideData);
-    compareMembership.config.savingsAccordionHolder.innerHTML = compareMembership.transposeCardData(savingsData);
-    compareMembership.config.benefitsAccordionHolder.innerHTML = compareMembership.transposeCardData(benefitsData);
+    compMemConfig.roadsideAccordionHolder.innerHTML = compareMembership.transposeCardData(roadsideData);
+    compMemConfig.savingsAccordionHolder.innerHTML = compareMembership.transposeCardData(savingsData);
+    compMemConfig.benefitsAccordionHolder.innerHTML = compareMembership.transposeCardData(benefitsData);
 
-    // console.log(compareMembership.config);
+    // console.log(compMemConfig);
   },
 
-  setOptionAttrHide: (targetColumnAndOption) => {
-    targetColumnAndOption.setAttribute("disabled", true);
-    targetColumnAndOption.setAttribute("aria-hidden", true);
-  },
+  // setOptionAttrHide: (targetColumnAndOption) => {
+  //   targetColumnAndOption.setAttribute("disabled", true);
+  //   targetColumnAndOption.setAttribute("aria-hidden", true);
+  // },
 
   // twoColInit: (columnsDisplayBlock) => {
   //   console.log("it's twoColInit");
@@ -254,10 +255,7 @@ let compareMembership = {
       selectedControlRowColImage = selectedControlRowCol.querySelectorAll(".membership-card__card-image"),
       selectedControlRowColCta = selectedControlRowCol.querySelectorAll(".compare-cards__cta-container a"),
       selectedControlRowColValue = selectedControlRowCol.getElementsByClassName("valueContainer"),
-      selectedControlRowColRv = selectedControlRowCol.getElementsByClassName("rvOption"),
-      selectedColroadside = roadsideAccordionHolder.querySelectorAll(selectedColumn),
-      selectedColsavings = savingsAccordionHolder.querySelectorAll(selectedColumn),
-      selectedColbenefits = benefitsAccordionHolder.querySelectorAll(selectedColumn);
+      selectedControlRowColRv = selectedControlRowCol.getElementsByClassName("rvOption");
 
     // update selected top section column items
     selectedControlRowColPrice[0].innerHTML = `$${selectedCardData.cardValue}`;
@@ -274,21 +272,9 @@ let compareMembership = {
         <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
         <label for="vehicle1">${selectedCardData.rvOption}</label>`
       : selectedControlRowColRv[0].innerHTML = "";
-
-    // selected accordion columns
-    console.log(selectedColroadside);
-    console.log(selectedColsavings);
-    console.log(selectedColbenefits);
-    console.log(selectedCardData);
-
   },
 
-  getSelectedColumn: (selectedBox, selectedCardData, selectBoxValue, selectOptionIndex) => {
-    // console.log(selectedBox.id);
-    // console.log(`${selectBoxValue} selected`);
-    // console.log(`index of selected is ${selectOptionIndex}`);
-    // console.log(selectedCardData);
-    // console.log(event);
+  getSelectedColumn: (selectedBox, selectedCardData) => {
 
     const columnB = ".row > div.colB",
       columnC = ".row > div.colC",
