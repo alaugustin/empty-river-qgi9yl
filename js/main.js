@@ -255,7 +255,10 @@ let compareMembership = {
       selectedControlRowColImage = selectedControlRowCol.querySelectorAll(".membership-card__card-image"),
       selectedControlRowColCta = selectedControlRowCol.querySelectorAll(".compare-cards__cta-container a"),
       selectedControlRowColValue = selectedControlRowCol.getElementsByClassName("valueContainer"),
-      selectedControlRowColRv = selectedControlRowCol.getElementsByClassName("rvOption");
+      selectedControlRowColRv = selectedControlRowCol.getElementsByClassName("rvOption"),
+      columnB = ".row > div.colB",
+      columnC = ".row > div.colC",
+      columnD = ".row > div.colD";;
 
     // update selected top section column items
     selectedControlRowColPrice[0].innerHTML = `$${selectedCardData.cardValue}`;
@@ -272,6 +275,64 @@ let compareMembership = {
         <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
         <label for="vehicle1">${selectedCardData.rvOption}</label>`
       : selectedControlRowColRv[0].innerHTML = "";
+
+    updateColumnData = (accordionCellArray, selectedAccordionData) => {
+      console.log(accordionCellArray);
+      console.log(selectedAccordionData);
+
+      accordionCellArray.map(
+        (accordionCellArrayItem, index) => {
+          accordionCellArrayItem.innerHTML = `
+            <div class="px-5 py-3">${selectedAccordionData[index]}</div>
+          `;
+        }
+      )
+    }
+
+    switch (selectedColumn) {
+      case columnB:
+        const roadsideAccordionCellB = roadsideAccordionHolder.querySelectorAll(columnB),
+          roadsideAccordionCellArrayB = [].slice.call(roadsideAccordionCellB),
+          savingsAccordionCellB = savingsAccordionHolder.querySelectorAll(columnB),
+          savingsAccordionCellArrayB = [].slice.call(savingsAccordionCellB),
+          benefitAccordionCellB = benefitsAccordionHolder.querySelectorAll(columnB),
+          benefitAccordionCellArrayB = [].slice.call(benefitAccordionCellB);
+
+        updateColumnData(roadsideAccordionCellArrayB, selectedCardData.roadside);
+        updateColumnData(savingsAccordionCellArrayB, selectedCardData.savings);
+        updateColumnData(benefitAccordionCellArrayB, selectedCardData.benefits);
+
+        break;
+      case columnC:
+        const roadsideAccordionCellC = roadsideAccordionHolder.querySelectorAll(columnC),
+          roadsideAccordionCellArrayC = [].slice.call(roadsideAccordionCellC),
+          savingsAccordionCellC = savingsAccordionHolder.querySelectorAll(columnC),
+          savingsAccordionCellArrayC = [].slice.call(savingsAccordionCellC),
+          benefitAccordionCellC = benefitsAccordionHolder.querySelectorAll(columnC),
+          benefitAccordionCellArrayC = [].slice.call(benefitAccordionCellC);
+
+        updateColumnData(roadsideAccordionCellArrayC, selectedCardData.roadside);
+        updateColumnData(savingsAccordionCellArrayC, selectedCardData.savings);
+        updateColumnData(benefitAccordionCellArrayC, selectedCardData.benefits);
+
+        break;
+      case columnD:
+        const roadsideAccordionCellD = roadsideAccordionHolder.querySelectorAll(columnD),
+          roadsideAccordionCellArrayD = [].slice.call(roadsideAccordionCellD),
+          savingsAccordionCellD = savingsAccordionHolder.querySelectorAll(columnD),
+          savingsAccordionCellArrayD = [].slice.call(savingsAccordionCellD),
+          benefitAccordionCellD = benefitsAccordionHolder.querySelectorAll(columnD),
+          benefitAccordionCellArrayD = [].slice.call(benefitAccordionCellD);
+
+        updateColumnData(roadsideAccordionCellArrayD, selectedCardData.roadside);
+        updateColumnData(savingsAccordionCellArrayD, selectedCardData.savings);
+        updateColumnData(benefitAccordionCellArrayD, selectedCardData.benefits);
+
+        break;
+
+      default:
+        break;
+    }
   },
 
   getSelectedColumn: (selectedBox, selectedCardData) => {
