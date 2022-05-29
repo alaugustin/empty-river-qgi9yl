@@ -10,6 +10,7 @@ let cardData = [
     },
     selectValue: "aLaCarte",
     bestValue: false,
+    rvOption: "",
     roadside: ["—", "—", "—", "—", "—", "—", "—"],
     savings: [
       "Member pricing on Canadian passport photos",
@@ -35,6 +36,7 @@ let cardData = [
     },
     selectValue: "basic",
     bestValue: false,
+    rvOption: "",
     roadside: [
       "Four service calls",
       "Towing distance of 10 km per call<sup>1</sup>",
@@ -68,6 +70,7 @@ let cardData = [
     },
     selectValue: "plus",
     bestValue: true,
+    rvOption:"RV option for $67/year more",
     roadside: [
       "Four service calls",
       "Towing distance of 200 km per call<sup>1</sup>",
@@ -101,6 +104,7 @@ let cardData = [
     },
     selectValue: "premier",
     bestValue: false,
+    rvOption:"RV option for $62/year more",
     roadside: [
       "Five service calls",
       "Towing distance of 320 km on one call and 200 km on four calls<sup>1</sup>",

@@ -43,6 +43,7 @@ let compareMembership = {
       premierCardData: cardData[3],
       topRowColumnsList: document.querySelectorAll(".compare-membership__top .row > div"),
       compareSelectBoxList: document.querySelectorAll(".compare-membership__top select"),
+      rvOptionsHolderList: document.querySelectorAll(".rvOption"),
       bestValueHolderList: document.querySelectorAll(".valueContainer"),
       membershipCardHeadingList: document.querySelectorAll(".membership-card__heading"),
       membershipCardPriceList: document.querySelectorAll(".membership-card__price span"),
@@ -51,6 +52,8 @@ let compareMembership = {
       roadsideAccordionHolder: document.querySelector(".roadside.accordion__content-container .accordion__complex-row"),
       savingsAccordionHolder: document.querySelector(".savings.accordion__content-container .accordion__complex-row"),
       benefitsAccordionHolder: document.querySelector(".benefits.accordion__content-container .accordion__complex-row"),
+      bestValueHtml: `<div class="rounded text-center p-1 bg-primary text-white">Best Value</div>`,
+
       roadsideData: [
         aLaCardData.roadside,
         basicCardData.roadside,
@@ -83,6 +86,7 @@ let compareMembership = {
     compareMembership.setCardDataAttr(compareMembership.config.membershipCardImgList, "src");
     compareMembership.setCardDataAttr(compareMembership.config.membershipCardCtaList, "href");
     compareMembership.initCardBestValue();
+    compareMembership.initCardRvOption();
     compareMembership.config.roadsideAccordionHolder.innerHTML = compareMembership.transposeCardData(roadsideData);
     compareMembership.config.savingsAccordionHolder.innerHTML = compareMembership.transposeCardData(savingsData);
     compareMembership.config.benefitsAccordionHolder.innerHTML = compareMembership.transposeCardData(benefitsData);
@@ -181,23 +185,33 @@ let compareMembership = {
   },
 
   initCardBestValue: () => {
-    const bestValHolderList = compareMembership.config.bestValueHolderList,
+    const compMemConfig = compareMembership.config,
+      bestValHolderList = compMemConfig.bestValueHolderList,
       bestValPresent = [aLaCardData.bestValue, basicCardData.bestValue, plusCardData.bestValue, premierCardData.bestValue];
-    console.log(bestValPresent);
-    console.log(bestValHolderList);
+
     bestValPresent.map(
       (x, index) => {
+        if (x) { bestValHolderList[index].innerHTML = compMemConfig.bestValueHtml }
+      }
+    )
+  },
+
+  initCardRvOption: () => {
+    const rvOptionHolderList = compareMembership.config.rvOptionsHolderList,
+      rvOptionPresent = [aLaCardData.rvOption, basicCardData.rvOption, plusCardData.rvOption, premierCardData.rvOption];
+
+    rvOptionPresent.map(
+      (x, index) => {
         if (x) {
-          console.log("true");
-          console.log(bestValHolderList[index]);
-          bestValHolderList[index].innerHTML = `<div class="rounded text-center p-1 bg-primary text-white">Best Value</div>`
-        } else {
-          console.log("false");
-          console.log(bestValHolderList[index]);
+          rvOptionHolderList[index].innerHTML = `
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+            <label for="vehicle1">${rvOptionPresent[index]}</label>
+          `
         }
       }
     )
   },
+
   // ----- Set accordion row parity -----
   rowParity: (rowParity, transposedArrayItem) => {
     return (`
@@ -230,14 +244,17 @@ let compareMembership = {
 
   // ----- Populate selected column with data
   populateSelectedColumnData: (selectedColumn, selectedIndex, selectedCardData) => {
-    const topColumnContainer = document.querySelectorAll(".compare-membership__top .row > div"),
+    const compMemConfig = compareMembership.config,
+      topColumnContainer = document.querySelectorAll(".compare-membership__top .row > div"),
       selectedControlRowCol = topColumnContainer[selectedIndex],
-      roadsideAccordionHolder = compareMembership.config.roadsideAccordionHolder,
-      savingsAccordionHolder = compareMembership.config.savingsAccordionHolder,
-      benefitsAccordionHolder = compareMembership.config.benefitsAccordionHolder,
+      roadsideAccordionHolder = compMemConfig.roadsideAccordionHolder,
+      savingsAccordionHolder = compMemConfig.savingsAccordionHolder,
+      benefitsAccordionHolder = compMemConfig.benefitsAccordionHolder,
       selectedControlRowColPrice = selectedControlRowCol.querySelectorAll(".membership-card__price span"),
       selectedControlRowColImage = selectedControlRowCol.querySelectorAll(".membership-card__card-image"),
       selectedControlRowColCta = selectedControlRowCol.querySelectorAll(".compare-cards__cta-container a"),
+      selectedControlRowColValue = selectedControlRowCol.getElementsByClassName("valueContainer"),
+      selectedControlRowColRv = selectedControlRowCol.getElementsByClassName("rvOption"),
       selectedColroadside = roadsideAccordionHolder.querySelectorAll(selectedColumn),
       selectedColsavings = savingsAccordionHolder.querySelectorAll(selectedColumn),
       selectedColbenefits = benefitsAccordionHolder.querySelectorAll(selectedColumn);
@@ -247,6 +264,16 @@ let compareMembership = {
     selectedControlRowColImage[0].src = selectedCardData.cardImg; // change the alt
     selectedControlRowColCta[0].href = selectedCardData.cardLink.url
     selectedControlRowColCta[0].innerHTML = selectedCardData.cardLink.label
+
+    selectedCardData.bestValue
+      ? selectedControlRowColValue[0].innerHTML = compMemConfig.bestValueHtml
+      : selectedControlRowColValue[0].innerHTML = "";
+
+    selectedCardData.rvOption
+      ? selectedControlRowColRv[0].innerHTML = `
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+        <label for="vehicle1">${selectedCardData.rvOption}</label>`
+      : selectedControlRowColRv[0].innerHTML = "";
 
     // selected accordion columns
     console.log(selectedColroadside);
