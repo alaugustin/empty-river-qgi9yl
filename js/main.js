@@ -52,6 +52,7 @@ let compareMembership = {
       roadsideAccordionHolder: document.querySelector(".roadside.accordion__content-container .accordion__complex-row"),
       savingsAccordionHolder: document.querySelector(".savings.accordion__content-container .accordion__complex-row"),
       benefitsAccordionHolder: document.querySelector(".benefits.accordion__content-container .accordion__complex-row"),
+      selectBox: document.getElementsByClassName("input__select-container"),
       bestValueHtml: `<div class="rounded text-center p-1 bg-primary text-white">Best Value</div>`,
       roadsideData: [
         aLaCardData.roadside,
@@ -95,51 +96,60 @@ let compareMembership = {
     // console.log(compMemConfig);
   },
 
-  // setOptionAttrHide: (targetColumnAndOption) => {
-  //   targetColumnAndOption.setAttribute("disabled", true);
-  //   targetColumnAndOption.setAttribute("aria-hidden", true);
-  // },
+  selectBoxInnit: (numberOfColumns, columnsDisplayBlock) => {
+    const selectBox = compareMembership.config.selectBox;
 
-  // twoColInit: (columnsDisplayBlock) => {
-  //   console.log("it's twoColInit");
-  //   console.log(columnsDisplayBlock);
-  // },
+    switch (numberOfColumns) {
+      case 3:
+        console.log(`it's ${numberOfColumns} columns`);
+        console.log(columnsDisplayBlock);
 
-  // threeColInit: (columnsDisplayBlock) => {
-  //   console.log("it's threeColInit");
-  //   console.log(columnsDisplayBlock);
-  // },
+        selectBox[1].innerHTML = `
+          <select id="selectBoxB">
+            <option value="aLaCarte" class="">A La Carte</option>
+            <option value="basic" class="" selected="selected">Basic</option>
+          </select>
+        `;
 
-  // handleDropdownChange: (selectBoxValue, selectedOptionIndex, event) => {
-  //   const selectBoxCollection = compareMembership.config.compareSelectBoxList,
-  //   columnCollectionArray = [].slice.call(selectBoxCollection)
+        selectBox[2].innerHTML = `
+          <select id="selectBoxC">
+            <option value="aLaCarte" class="">A La Carte</option>
+            <option value="plus" class="" selected="selected">Plus</option>
+          </select>
+        `;
 
-  //   console.log(`
-  //   the select box value is ${selectBoxValue}
-  //   the select box value index is ${selectedOptionIndex}
-  //   `);
-  //   console.log(event);
-  //   console.log(event.target);
-  //   console.log(cardData[selectedOptionIndex]); // selected card data
+        selectBox[3].innerHTML = `
+          <select id="selectBoxD">
+            <option value="aLaCarte" class="">A La Carte</option>
+            <option value="premier" class="" selected="selected">Premier</option>
+          </select>
+        `;
 
-  //   columnCollectionArray.map(
-  //     selectBox => {
-  //       if (selectBox.id == event.target.id) {
-  //         selectBox.style.backgroundColor = "red";
-  //         console.log(selectBox.options[selectedOptionIndex]);
-  //       } else {
-  //         selectBox.style.backgroundColor = "blue";
-  //         console.log(selectBox.options[selectedOptionIndex]);
-  //       }
-  //     }
-  //   )
-  // },
+        break;
+      case 2:
+        console.log(`it's ${numberOfColumns} columns`);
+        console.log(columnsDisplayBlock);
 
-  twoCols: () => {
-    console.log("it's 2 columns");
-  },
-  threeCols: () => {
-    console.log("it's 3 columns");
+        selectBox[1].innerHTML = `
+          <select id="selectBoxB">
+            <option value="aLaCarte" class="">A La Carte</option>
+            <option value="basic" class="" selected="selected">Basic</option>
+            <option value="premier" class="">Premier</option>
+          </select>
+        `;
+
+        selectBox[2].innerHTML = `
+          <select id="selectBoxC">
+            <option value="aLaCarte" class="">A La Carte</option>
+            <option value="plus" class="" selected="selected">Plus</option>
+            <option value="premier" class="">Premier</option>
+          </select>
+        `;
+
+        break;
+      default:
+        break;
+    }
   },
 
   // ----- Is the page two or three columns -----
@@ -147,20 +157,16 @@ let compareMembership = {
     const columnCollection = compareMembership.config.topRowColumnsList,
       columnCollectionArray = [].slice.call(columnCollection),
       columnsDisplayNone = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "none" }),
-      columnsDisplayBlock = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "block" });
-    // ----- Three columns -----
-    if (columnsDisplayNone.length == 1) {
-      console.log("it's 3 columns");
-      // const colAselect = columnsDisplayBlock[0].getElementsByTagName("select");
-      // const colAselectOptions = colAselect[0].options;
-      // const colBselect = columnsDisplayBlock[1].getElementsByTagName("select");
-      // const colBselectOptions = colBselect[0].options;
-      // const colCselect = columnsDisplayBlock[2].getElementsByTagName("select");
-      // const colCselectOptions = colCselect[0].options;
-    }
-    // ----- Two columns -----
-    if (columnsDisplayNone.length == 2) {
-      console.log("it's 2 columns");
+      columnsDisplayBlock = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "block" }),
+      columnsDisplayed3 = (columnsDisplayNone.length == 1),
+      columnsDisplayed2 = (columnsDisplayNone.length == 2);
+
+    if (columnsDisplayed3) {
+      compareMembership.selectBoxInnit(columnsDisplayBlock.length, columnsDisplayBlock);
+    } else if (columnsDisplayed2) {
+      compareMembership.selectBoxInnit(columnsDisplayBlock.length, columnsDisplayBlock);
+    } else {
+      console.log("four col");
     }
   },
 
@@ -191,8 +197,8 @@ let compareMembership = {
       bestValPresent = [aLaCardData.bestValue, basicCardData.bestValue, plusCardData.bestValue, premierCardData.bestValue];
 
     bestValPresent.map(
-      (x, index) => {
-        if (x) { bestValHolderList[index].innerHTML = compMemConfig.bestValueHtml }
+      (bvHolder, index) => {
+        if (bvHolder) { bestValHolderList[index].innerHTML = compMemConfig.bestValueHtml }
       }
     )
   },
@@ -202,8 +208,8 @@ let compareMembership = {
       rvOptionPresent = [aLaCardData.rvOption, basicCardData.rvOption, plusCardData.rvOption, premierCardData.rvOption];
 
     rvOptionPresent.map(
-      (x, index) => {
-        if (x) {
+      (rvHolder, index) => {
+        if (rvHolder) {
           rvOptionHolderList[index].innerHTML = `
             <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
             <label for="vehicle1">${rvOptionPresent[index]}</label>
@@ -277,9 +283,6 @@ let compareMembership = {
       : selectedControlRowColRv[0].innerHTML = "";
 
     updateColumnData = (accordionCellArray, selectedAccordionData) => {
-      console.log(accordionCellArray);
-      console.log(selectedAccordionData);
-
       accordionCellArray.map(
         (accordionCellArrayItem, index) => {
           accordionCellArrayItem.innerHTML = `
@@ -333,6 +336,8 @@ let compareMembership = {
       default:
         break;
     }
+
+    compareMembership.twoOrThreeColumnsVisible();
   },
 
   getSelectedColumn: (selectedBox, selectedCardData) => {
