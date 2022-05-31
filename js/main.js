@@ -96,13 +96,11 @@ let compareMembership = {
     // console.log(compMemConfig);
   },
 
-  selectBoxInnit: (numberOfColumns, columnsDisplayBlock) => {
+  selectBoxInnit: (numberOfColumns) => {
     const selectBox = compareMembership.config.selectBox;
 
     switch (numberOfColumns) {
       case 3:
-        console.log(`it's ${numberOfColumns} columns`);
-        console.log(columnsDisplayBlock);
 
         selectBox[1].innerHTML = `
           <select id="selectBoxB">
@@ -127,8 +125,6 @@ let compareMembership = {
 
         break;
       case 2:
-        console.log(`it's ${numberOfColumns} columns`);
-        console.log(columnsDisplayBlock);
 
         selectBox[1].innerHTML = `
           <select id="selectBoxB">
@@ -249,97 +245,6 @@ let compareMembership = {
     return accordionRow;
   },
 
-  // ----- Populate selected column with data
-  populateSelectedColumnData: (selectedColumn, selectedIndex, selectedCardData) => {
-    const compMemConfig = compareMembership.config,
-      topColumnContainer = document.querySelectorAll(".compare-membership__top .row > div"),
-      selectedControlRowCol = topColumnContainer[selectedIndex],
-      roadsideAccordionHolder = compMemConfig.roadsideAccordionHolder,
-      savingsAccordionHolder = compMemConfig.savingsAccordionHolder,
-      benefitsAccordionHolder = compMemConfig.benefitsAccordionHolder,
-      selectedControlRowColPrice = selectedControlRowCol.querySelectorAll(".membership-card__price span"),
-      selectedControlRowColImage = selectedControlRowCol.querySelectorAll(".membership-card__card-image"),
-      selectedControlRowColCta = selectedControlRowCol.querySelectorAll(".compare-cards__cta-container a"),
-      selectedControlRowColValue = selectedControlRowCol.getElementsByClassName("valueContainer"),
-      selectedControlRowColRv = selectedControlRowCol.getElementsByClassName("rvOption"),
-      columnB = ".row > div.colB",
-      columnC = ".row > div.colC",
-      columnD = ".row > div.colD";;
-
-    // update selected top section column items
-    selectedControlRowColPrice[0].innerHTML = `$${selectedCardData.cardValue}`;
-    selectedControlRowColImage[0].src = selectedCardData.cardImg; // change the alt
-    selectedControlRowColCta[0].href = selectedCardData.cardLink.url
-    selectedControlRowColCta[0].innerHTML = selectedCardData.cardLink.label
-
-    selectedCardData.bestValue
-      ? selectedControlRowColValue[0].innerHTML = compMemConfig.bestValueHtml
-      : selectedControlRowColValue[0].innerHTML = "";
-
-    selectedCardData.rvOption
-      ? selectedControlRowColRv[0].innerHTML = `
-        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-        <label for="vehicle1">${selectedCardData.rvOption}</label>`
-      : selectedControlRowColRv[0].innerHTML = "";
-
-    updateColumnData = (accordionCellArray, selectedAccordionData) => {
-      accordionCellArray.map(
-        (accordionCellArrayItem, index) => {
-          accordionCellArrayItem.innerHTML = `
-            <div class="px-5 py-3">${selectedAccordionData[index]}</div>
-          `;
-        }
-      )
-    }
-
-    switch (selectedColumn) {
-      case columnB:
-        const roadsideAccordionCellB = roadsideAccordionHolder.querySelectorAll(columnB),
-          roadsideAccordionCellArrayB = [].slice.call(roadsideAccordionCellB),
-          savingsAccordionCellB = savingsAccordionHolder.querySelectorAll(columnB),
-          savingsAccordionCellArrayB = [].slice.call(savingsAccordionCellB),
-          benefitAccordionCellB = benefitsAccordionHolder.querySelectorAll(columnB),
-          benefitAccordionCellArrayB = [].slice.call(benefitAccordionCellB);
-
-        updateColumnData(roadsideAccordionCellArrayB, selectedCardData.roadside);
-        updateColumnData(savingsAccordionCellArrayB, selectedCardData.savings);
-        updateColumnData(benefitAccordionCellArrayB, selectedCardData.benefits);
-
-        break;
-      case columnC:
-        const roadsideAccordionCellC = roadsideAccordionHolder.querySelectorAll(columnC),
-          roadsideAccordionCellArrayC = [].slice.call(roadsideAccordionCellC),
-          savingsAccordionCellC = savingsAccordionHolder.querySelectorAll(columnC),
-          savingsAccordionCellArrayC = [].slice.call(savingsAccordionCellC),
-          benefitAccordionCellC = benefitsAccordionHolder.querySelectorAll(columnC),
-          benefitAccordionCellArrayC = [].slice.call(benefitAccordionCellC);
-
-        updateColumnData(roadsideAccordionCellArrayC, selectedCardData.roadside);
-        updateColumnData(savingsAccordionCellArrayC, selectedCardData.savings);
-        updateColumnData(benefitAccordionCellArrayC, selectedCardData.benefits);
-
-        break;
-      case columnD:
-        const roadsideAccordionCellD = roadsideAccordionHolder.querySelectorAll(columnD),
-          roadsideAccordionCellArrayD = [].slice.call(roadsideAccordionCellD),
-          savingsAccordionCellD = savingsAccordionHolder.querySelectorAll(columnD),
-          savingsAccordionCellArrayD = [].slice.call(savingsAccordionCellD),
-          benefitAccordionCellD = benefitsAccordionHolder.querySelectorAll(columnD),
-          benefitAccordionCellArrayD = [].slice.call(benefitAccordionCellD);
-
-        updateColumnData(roadsideAccordionCellArrayD, selectedCardData.roadside);
-        updateColumnData(savingsAccordionCellArrayD, selectedCardData.savings);
-        updateColumnData(benefitAccordionCellArrayD, selectedCardData.benefits);
-
-        break;
-
-      default:
-        break;
-    }
-
-    compareMembership.twoOrThreeColumnsVisible();
-  },
-
   getSelectedColumn: (selectedBox, selectedCardData) => {
 
     const columnB = ".row > div.colB",
@@ -368,39 +273,205 @@ let compareMembership = {
     }
   },
 
+  handleDropDownChange: () => {
+    const targetedSelectBox = event.target,
+      optionsInSelectBoxCount = event.target.options.length;
+
+
+    const columnCollection = compareMembership.config.topRowColumnsList,
+      columnCollectionArray = [].slice.call(columnCollection),
+      columnsDisplayNone = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "none" }),
+      columnsDisplayBlock = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "block" }),
+      columnsDisplayed3 = (columnsDisplayNone.length == 1),
+      columnsDisplayed2 = (columnsDisplayNone.length == 2);
+
+    columnsDisplayBlock.map(
+      x => console.log(x.querySelector("select"))
+    )
+
+    if (columnsDisplayed3) {
+      console.log(`it's three col`);
+      console.log(targetedSelectBox);
+      // console.log(columnsDisplayBlock);
+    } else if (columnsDisplayed2) {
+      console.log(`it's two col`);
+      console.log(targetedSelectBox);
+      // console.log(columnsDisplayBlock);
+    } else {
+      console.log("four col");
+    }
+  },
+
+  // ----- Populate selected column with data
+  handleWhoWasSelected: (selectedCardData) => {
+    const compMemConfig = compareMembership.config,
+      roadsideAccordionHolder = compMemConfig.roadsideAccordionHolder,
+      savingsAccordionHolder = compMemConfig.savingsAccordionHolder,
+      benefitsAccordionHolder = compMemConfig.benefitsAccordionHolder,
+      topRowHolder = compareMembership.config.topRowColumnsList,
+      selectedColumn = event.target.id,
+      topColumnB = topRowHolder[1],
+      topColumnC = topRowHolder[2],
+      topColumnD = topRowHolder[3],
+      columnB = ".row > div.colB",
+      columnC = ".row > div.colC",
+      columnD = ".row > div.colD";
+
+    getTopRowItems = (selectedColumn) => {
+      const selectedControlRowColPrice = selectedColumn.querySelectorAll(".membership-card__price span")[0],
+        selectedControlRowColImage = selectedColumn.querySelectorAll(".membership-card__card-image")[0],
+        selectedControlRowColCta = selectedColumn.querySelectorAll(".compare-cards__cta-container a")[0],
+        selectedControlRowColValue = selectedColumn.getElementsByClassName("valueContainer")[0],
+        selectedControlRowColRv = selectedColumn.getElementsByClassName("rvOption")[0];
+
+      // update selected top section column items
+      selectedControlRowColPrice.innerHTML = `$${selectedCardData.cardValue}`;
+      selectedControlRowColImage.src = selectedCardData.cardImg; // change the alt
+      selectedControlRowColCta.href = selectedCardData.cardLink.url
+      selectedControlRowColCta.innerHTML = selectedCardData.cardLink.label
+
+      selectedCardData.bestValue
+        ? selectedControlRowColValue.innerHTML = compMemConfig.bestValueHtml
+        : selectedControlRowColValue.innerHTML = "";
+
+      selectedCardData.rvOption
+        ? selectedControlRowColRv.innerHTML = `
+      <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+      <label for="vehicle1">${selectedCardData.rvOption}</label>`
+        : selectedControlRowColRv.innerHTML = "";
+    }
+
+    updateColumnData = (accordionCellArray, selectedAccordionData) => {
+      accordionCellArray.map(
+        (accordionCellArrayItem, index) => {
+          accordionCellArrayItem.innerHTML = `
+            <div class="px-5 py-3">${selectedAccordionData[index]}</div>
+          `;
+        }
+      )
+    }
+
+    switch (selectedColumn) {
+      case "selectBoxB":
+        const roadsideAccordionCellB = roadsideAccordionHolder.querySelectorAll(columnB),
+          roadsideAccordionCellArrayB = [].slice.call(roadsideAccordionCellB),
+          savingsAccordionCellB = savingsAccordionHolder.querySelectorAll(columnB),
+          savingsAccordionCellArrayB = [].slice.call(savingsAccordionCellB),
+          benefitAccordionCellB = benefitsAccordionHolder.querySelectorAll(columnB),
+          benefitAccordionCellArrayB = [].slice.call(benefitAccordionCellB);
+
+          getTopRowItems(topColumnB);
+
+        updateColumnData(roadsideAccordionCellArrayB, selectedCardData.roadside);
+        updateColumnData(savingsAccordionCellArrayB, selectedCardData.savings);
+        updateColumnData(benefitAccordionCellArrayB, selectedCardData.benefits);
+
+        compareMembership.handleDropDownChange();
+
+        break;
+      case "selectBoxC":
+        const roadsideAccordionCellC = roadsideAccordionHolder.querySelectorAll(columnC),
+          roadsideAccordionCellArrayC = [].slice.call(roadsideAccordionCellC),
+          savingsAccordionCellC = savingsAccordionHolder.querySelectorAll(columnC),
+          savingsAccordionCellArrayC = [].slice.call(savingsAccordionCellC),
+          benefitAccordionCellC = benefitsAccordionHolder.querySelectorAll(columnC),
+          benefitAccordionCellArrayC = [].slice.call(benefitAccordionCellC);
+
+          getTopRowItems(topColumnC);
+
+        updateColumnData(roadsideAccordionCellArrayC, selectedCardData.roadside);
+        updateColumnData(savingsAccordionCellArrayC, selectedCardData.savings);
+        updateColumnData(benefitAccordionCellArrayC, selectedCardData.benefits);
+
+        compareMembership.handleDropDownChange();
+
+        break;
+      case "selectBoxD":
+        const roadsideAccordionCellD = roadsideAccordionHolder.querySelectorAll(columnD),
+          roadsideAccordionCellArrayD = [].slice.call(roadsideAccordionCellD),
+          savingsAccordionCellD = savingsAccordionHolder.querySelectorAll(columnD),
+          savingsAccordionCellArrayD = [].slice.call(savingsAccordionCellD),
+          benefitAccordionCellD = benefitsAccordionHolder.querySelectorAll(columnD),
+          benefitAccordionCellArrayD = [].slice.call(benefitAccordionCellD);
+
+          getTopRowItems(topColumnD);
+
+        updateColumnData(roadsideAccordionCellArrayD, selectedCardData.roadside);
+        updateColumnData(savingsAccordionCellArrayD, selectedCardData.savings);
+        updateColumnData(benefitAccordionCellArrayD, selectedCardData.benefits);
+
+        compareMembership.handleDropDownChange();
+
+        break;
+
+      default:
+        break;
+    }
+  },
+
+  whoWasSelected: (selectedOptionText, selectedTargetLength, selectOptionA, selectOptionB, selectOptionC) => {
+    switch (selectedOptionText) {
+      case "A La Carte":
+        selectedCardData = compareMembership.config.aLaCardData;
+        compareMembership.handleWhoWasSelected(selectedCardData);
+        break;
+      case "Basic":
+        selectedCardData = compareMembership.config.basicCardData;
+        compareMembership.handleWhoWasSelected(selectedCardData);
+        break;
+      case "Plus":
+        selectedCardData = compareMembership.config.plusCardData;
+        compareMembership.handleWhoWasSelected(selectedCardData);
+        break;
+      case "Premier":
+        selectedCardData = compareMembership.config.premierCardData;
+        compareMembership.handleWhoWasSelected(selectedCardData);
+        break;
+
+      default:
+        break;
+    }
+  },
+
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
   eventHandlers: () => {
-    const compareSelectBoxList = compareMembership.config.compareSelectBoxList,
-      compareSelectBoxListArray = [].slice.call(compareSelectBoxList);
-
-      // window.addEventListener('resize', (event) => {
-      //   compareMembership.twoOrThreeColumnsVisible(event);
-      // }, true);
+    const selectBoxHolderCollection = document.getElementsByClassName("input__select-container"),
+      selectBoxHolderCollectionArray = [].slice.call(selectBoxHolderCollection);
 
       // ----- Handle dropdown changes -----
-      compareSelectBoxListArray.map(
-      selectBox => {
-          selectBox.addEventListener('change', (event) => {
-            const selectedBox = selectBox,
-              selectBoxValue = selectBox.value,
-              selectOptionIndex = selectBox.selectedIndex,
-              selectedCardData = cardData[selectOptionIndex];
 
-          switch (selectBoxValue) {
-            case "aLaCarte":
-              compareMembership.getSelectedColumn(selectedBox, selectedCardData, selectBoxValue, selectOptionIndex);
+    selectBoxHolderCollectionArray.map(
+      selectBoxHolder => {
+          selectBoxHolder.addEventListener('change', (event) => {
+            const selectedTargetLength = event.target.options.length,
+              selectedIndex = event.target.options.selectedIndex,
+              eventTargetId = event.target.id,
+              selectOptionA = event.target.options[0].innerHTML,
+              selectOptionB = event.target.options[1].innerHTML,
+              selectedOptionText = event.target.options[selectedIndex].innerHTML;
+
+            const twoOrThreeCol = () => {
+              if (selectedTargetLength == 2) {
+                compareMembership.whoWasSelected(selectedOptionText, selectedTargetLength, selectOptionA, selectOptionB);
+              }
+              if (selectedTargetLength == 3) {
+                const selectOptionC = event.target.options[2].innerHTML;
+
+                compareMembership.whoWasSelected(selectedOptionText, selectedTargetLength, selectOptionA, selectOptionB, selectOptionC);
+              }
+            }
+
+            switch (eventTargetId) {
+            case "selectBoxB":
+              twoOrThreeCol();
 
               break;
-            case "basic":
-              compareMembership.getSelectedColumn(selectedBox, selectedCardData, selectBoxValue, selectOptionIndex);
+            case "selectBoxC":
+              twoOrThreeCol();
 
               break;
-            case "plus":
-              compareMembership.getSelectedColumn(selectedBox, selectedCardData, selectBoxValue, selectOptionIndex);
-
-              break;
-            case "premier":
-              compareMembership.getSelectedColumn(selectedBox, selectedCardData, selectBoxValue, selectOptionIndex);
+            case "selectBoxD":
+              twoOrThreeCol();
 
               break;
             default:
@@ -416,30 +487,3 @@ let compareMembership = {
 window.addEventListener("load", () => {
   compareMembership.init();
 });
-
-// document.addEventListener("DOMContentLoaded", function (e) {
-//   let mqls = [
-//     window.matchMedia("(max-width: 767px)"),
-//     window.matchMedia("(min-width: 768px) and (max-width: 991px)"),
-//     window.matchMedia("(min-width: 992px)"),
-//   ];
-
-//   const mqh = () => {
-//     if (mqls[0].matches) {
-//       console.log("this is mobile");
-//       console.log("CALLBACK (max-width: 767px)");
-//     } else if (mqls[1].matches) {
-//       getNumberOfColumns();
-//       console.log("this is tablet");
-//       console.log("CALLBACK (min-width: 768px)");
-//     } else if (mqls[2].matches) {
-//       getNumberOfColumns();
-//       console.log("this is desk");
-//       console.log("CALLBACK (min-width: 992px)");
-//     }
-//     console.log("window.innerWidth: " + window.innerWidth);
-//   };
-
-//   const mappedMq = mqls.map((x) => x.addListener(mqh));
-//   mqh();
-// });
