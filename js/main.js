@@ -279,6 +279,8 @@ let compareMembership = {
 
   handleDropDownChange: () => {
     const targetedSelectBox = event.target,
+      optionsInSelectBoxCount = event.target.options.length,
+      columnCollection = compareMembership.config.topRowColumnsList,
       columnCollectionArray = compareMembership.collectionToArray(columnCollection),
       columnsDisplayNone = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "none" }),
       columnsDisplayBlock = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "block" }),
@@ -286,20 +288,35 @@ let compareMembership = {
       columnsDisplayed2 = (columnsDisplayNone.length == 2);
 
     columnsDisplayBlock.map(
-      x => console.log(x.querySelector("select"))
-    )
+      selectedBox => {
+        const selectedBoxId = selectedBox.querySelector("select").id,
+          getSelectBoxOptions = document.getElementById(selectedBoxId).querySelectorAll("option");
 
-    if (columnsDisplayed3) {
-      console.log(`it's three col`);
-      console.log(targetedSelectBox);
-      // console.log(columnsDisplayBlock);
-    } else if (columnsDisplayed2) {
-      console.log(`it's two col`);
-      console.log(targetedSelectBox);
-      // console.log(columnsDisplayBlock);
-    } else {
-      console.log("four col");
-    }
+        if (targetedSelectBox.id == selectedBoxId) {
+          const targetSelectBoxOptions = getSelectBoxOptions,
+            targetOptionA = targetSelectBoxOptions[0],
+            targetOptionB = targetSelectBoxOptions[1];
+
+          console.log(targetOptionA.innerHTML);
+          console.log(targetOptionB.innerHTML);
+          console.log(`--- target`);
+
+          document.getElementById(selectedBoxId).style.background = "red";
+
+          return targetOptionA;
+        } else {
+          const selectBoxOptions = getSelectBoxOptions,
+            selectBoxOptionA = selectBoxOptions[0],
+            selectBoxOptionB = selectBoxOptions[1];
+
+          console.log(selectBoxOptionA.innerHTML);
+          console.log(selectBoxOptionB.innerHTML);
+          console.log(`--- other`);
+
+          document.getElementById(selectedBoxId).style.background = "pink";
+        }
+      }
+    )
   },
 
   // ----- Populate selected column with data
