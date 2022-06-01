@@ -96,6 +96,10 @@ let compareMembership = {
     // console.log(compMemConfig);
   },
 
+  collectionToArray: (collectedObjects) => {
+    return [].slice.call(collectedObjects)
+  },
+
   selectBoxInnit: (numberOfColumns) => {
     const selectBox = compareMembership.config.selectBox;
 
@@ -151,7 +155,7 @@ let compareMembership = {
   // ----- Is the page two or three columns -----
   twoOrThreeColumnsVisible: () => {
     const columnCollection = compareMembership.config.topRowColumnsList,
-      columnCollectionArray = [].slice.call(columnCollection),
+      columnCollectionArray = compareMembership.collectionToArray(columnCollection),
       columnsDisplayNone = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "none" }),
       columnsDisplayBlock = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "block" }),
       columnsDisplayed3 = (columnsDisplayNone.length == 1),
@@ -275,11 +279,7 @@ let compareMembership = {
 
   handleDropDownChange: () => {
     const targetedSelectBox = event.target,
-      optionsInSelectBoxCount = event.target.options.length;
-
-
-    const columnCollection = compareMembership.config.topRowColumnsList,
-      columnCollectionArray = [].slice.call(columnCollection),
+      columnCollectionArray = compareMembership.collectionToArray(columnCollection),
       columnsDisplayNone = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "none" }),
       columnsDisplayBlock = columnCollectionArray.filter((el) => { return getComputedStyle(el).display === "block" }),
       columnsDisplayed3 = (columnsDisplayNone.length == 1),
@@ -354,11 +354,11 @@ let compareMembership = {
     switch (selectedColumn) {
       case "selectBoxB":
         const roadsideAccordionCellB = roadsideAccordionHolder.querySelectorAll(columnB),
-          roadsideAccordionCellArrayB = [].slice.call(roadsideAccordionCellB),
+          roadsideAccordionCellArrayB = compareMembership.collectionToArray(roadsideAccordionCellB),
           savingsAccordionCellB = savingsAccordionHolder.querySelectorAll(columnB),
-          savingsAccordionCellArrayB = [].slice.call(savingsAccordionCellB),
+          savingsAccordionCellArrayB = compareMembership.collectionToArray(savingsAccordionCellB),
           benefitAccordionCellB = benefitsAccordionHolder.querySelectorAll(columnB),
-          benefitAccordionCellArrayB = [].slice.call(benefitAccordionCellB);
+          benefitAccordionCellArrayB = compareMembership.collectionToArray(benefitAccordionCellB);
 
           getTopRowItems(topColumnB);
 
@@ -371,11 +371,11 @@ let compareMembership = {
         break;
       case "selectBoxC":
         const roadsideAccordionCellC = roadsideAccordionHolder.querySelectorAll(columnC),
-          roadsideAccordionCellArrayC = [].slice.call(roadsideAccordionCellC),
+          roadsideAccordionCellArrayC = compareMembership.collectionToArray(roadsideAccordionCellC),
           savingsAccordionCellC = savingsAccordionHolder.querySelectorAll(columnC),
-          savingsAccordionCellArrayC = [].slice.call(savingsAccordionCellC),
+          savingsAccordionCellArrayC = compareMembership.collectionToArray(savingsAccordionCellC),
           benefitAccordionCellC = benefitsAccordionHolder.querySelectorAll(columnC),
-          benefitAccordionCellArrayC = [].slice.call(benefitAccordionCellC);
+          benefitAccordionCellArrayC = compareMembership.collectionToArray(benefitAccordionCellC);
 
           getTopRowItems(topColumnC);
 
@@ -388,11 +388,11 @@ let compareMembership = {
         break;
       case "selectBoxD":
         const roadsideAccordionCellD = roadsideAccordionHolder.querySelectorAll(columnD),
-          roadsideAccordionCellArrayD = [].slice.call(roadsideAccordionCellD),
+          roadsideAccordionCellArrayD = compareMembership.collectionToArray(roadsideAccordionCellD),
           savingsAccordionCellD = savingsAccordionHolder.querySelectorAll(columnD),
-          savingsAccordionCellArrayD = [].slice.call(savingsAccordionCellD),
+          savingsAccordionCellArrayD = compareMembership.collectionToArray(savingsAccordionCellD),
           benefitAccordionCellD = benefitsAccordionHolder.querySelectorAll(columnD),
-          benefitAccordionCellArrayD = [].slice.call(benefitAccordionCellD);
+          benefitAccordionCellArrayD = compareMembership.collectionToArray(benefitAccordionCellD);
 
           getTopRowItems(topColumnD);
 
@@ -410,21 +410,23 @@ let compareMembership = {
   },
 
   whoWasSelected: (selectedOptionText, selectedTargetLength, selectOptionA, selectOptionB, selectOptionC) => {
+    const compMemConfig = compareMembership.config;
+
     switch (selectedOptionText) {
       case "A La Carte":
-        selectedCardData = compareMembership.config.aLaCardData;
+        selectedCardData = compMemConfig.aLaCardData;
         compareMembership.handleWhoWasSelected(selectedCardData);
         break;
       case "Basic":
-        selectedCardData = compareMembership.config.basicCardData;
+        selectedCardData = compMemConfig.basicCardData;
         compareMembership.handleWhoWasSelected(selectedCardData);
         break;
       case "Plus":
-        selectedCardData = compareMembership.config.plusCardData;
+        selectedCardData = compMemConfig.plusCardData;
         compareMembership.handleWhoWasSelected(selectedCardData);
         break;
       case "Premier":
-        selectedCardData = compareMembership.config.premierCardData;
+        selectedCardData = compMemConfig.premierCardData;
         compareMembership.handleWhoWasSelected(selectedCardData);
         break;
 
@@ -436,7 +438,7 @@ let compareMembership = {
   // -------------------- HANDLE ALL PAGE LEVEL EVENTS --------------------
   eventHandlers: () => {
     const selectBoxHolderCollection = document.getElementsByClassName("input__select-container"),
-      selectBoxHolderCollectionArray = [].slice.call(selectBoxHolderCollection);
+      selectBoxHolderCollectionArray = compareMembership.collectionToArray(selectBoxHolderCollection);
 
       // ----- Handle dropdown changes -----
 
